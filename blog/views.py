@@ -17,28 +17,17 @@ def postwall(request):
     most recent posts first. The context also includes the current logged-in user, enabling user-specific
     functionalities, such as adding comments.
     """
-
-    # Retrieve all published posts, sorted in descending order by their creation date.
     posts_with_comments = []
-    # Initialize a list to hold posts and their associated comments.
     posts = Post.objects.filter(is_published=True).order_by('-created_at')
 
-    # Iterate through each post to fetch its comments.
     for post in posts:
-        # Get all comments related to the current post
         comments = post.comments.all()
-        # Append a dictionary containing the post and its comments to the list.
         posts_with_comments.append({'post': post, 'comments': comments})
 
-    # Prepare the context data to be passed to the template.
     context = {
-        # List of posts and comments for rendering
         'posts_with_comments': posts_with_comments,
-        # The currently logged-in user
         'user': request.user,
     }
-
-    # Render the 'postwall.html' template with the context data.
     return render(request, "postwall.html", context)
 
 

@@ -41,8 +41,6 @@ class ProfileAdmin(UserAdmin):
         """
         User Profile Picture visible as a thumbnail in the admin interface
         """
-
-        # If user have a profile picture, return the picture in the style - row 60
         if obj.profile_picture:
             return format_html('<img src="{}" width="50" style="border-radius: 50%;" />'.format(obj.profile_picture.url))
         else:

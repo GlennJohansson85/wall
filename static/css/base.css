@@ -265,6 +265,15 @@ html {
 }
 
 /* POSTWALL.HTML */
+
+
+.postwall-no-post {
+	margin: 200px auto;
+	font-family: "Cocogoose-Narrow-Letterpress-trial";
+	letter-spacing: 1px;
+	text-align: center;
+	font-size: 48px;
+}
 /* Container for a post incl. title, image, content, meta */
 .polaroid {
 	max-width: 100%;
