@@ -44,8 +44,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -121,9 +119,9 @@ if 'USE_AWS' in os.environ:
     }
 
     # AWS S3 Configuration
-    AWS_STORAGE_BUCKET_NAME = ''
+    AWS_STORAGE_BUCKET_NAME = 's3-bucket-wall'
     AWS_S3_REGION_NAME = 'eu-north-1'
-    AWS_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY', '')
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY', '')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
 
