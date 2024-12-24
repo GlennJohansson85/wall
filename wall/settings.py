@@ -104,23 +104,38 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 STATIC_URL = '/static/'
 
 if 'USE_AWS' in os.environ:
+    # For AWS S3 in production
     AWS_STORAGE_BUCKET_NAME = 's3-bucket-wall'
     AWS_S3_REGION_NAME = 'eu-north-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
-    AWS_S3_CUSTOM_DOMAIN = 's3-bucket-wall.s3.eu-north-1.amazonaws.com'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
 
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    STATIC_URL = 'https://s3-bucket-wall.s3.eu-north-1.amazonaws.com/static/'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 
+    # Only include this for production to avoid conflicts with local static files
+    STATICFILES_DIRS = [BASE_DIR / 'static']
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+else:
+    # Local development (default Django static serving)
     STATICFILES_DIRS = [BASE_DIR / 'static']
     STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+    # In development, use django's static file handling for local static files
+    if DEBUG:
+        STATIC_URL = '/static/'
 
+
+# Media files (user uploads) settings
 MEDIA_URL = '/media/'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-MEDIA_URL = 'https://s3-bucket-wall.s3.eu-north-1.amazonaws.com/media/'
+if 'USE_AWS' in os.environ:
+    # For AWS S3 in production
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 
-MEDIA_ROOT = BASE_DIR / 'media'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+else:
+    # Local development (default Django media handling)
+    MEDIA_ROOT = BASE_DIR / 'media'
+    MEDIA_URL = '/media/'  # For local development use
