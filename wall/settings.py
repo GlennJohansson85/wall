@@ -1,8 +1,11 @@
 import os
 from pathlib import Path
-import dj_database_url
+if os.path.isfile('env.py'):
+    import env
+
+
 from django.contrib.messages import constants as messages
-import cloudinary.uploader
+from cloudinary import uploader
 
 
 # Base directory for the project
@@ -12,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # Debug settings
-DEBUG = False
+DEBUG = True
 
 # URLs and Hosts
 ROOT_URLCONF = 'wall.urls'
@@ -74,18 +77,14 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
-# Database settings
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+# Database
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 # Auth
 AUTH_USER_MODEL = 'accounts.Profile'
@@ -122,7 +121,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Cloudinary will handle the media
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR /'media'
 
 # Media files (Cloudinary)
 CLOUDINARY_STORAGE = {

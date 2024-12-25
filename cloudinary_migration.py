@@ -4,7 +4,6 @@ load_dotenv()
 
 # Import the Cloudinary libraries
 import cloudinary
-from cloudinary import CloudinaryImage
 import cloudinary.uploader
 import cloudinary.api
 

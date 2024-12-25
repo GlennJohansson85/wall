@@ -47,19 +47,19 @@
                     <!-- Form to add a comment using button or key "Enter"  -->
                     <form method="post" action="{% url 'add_comment' item.post.id %}" id="comment-form-{{ item.post.id }}">
                         {% csrf_token %}
+
                         <div class="postwall-form-container">
                             <textarea id="id_textarea" name="comment_text" rows="1" placeholder="Add Comment Here..."
                                 onkeypress="handleKeyPress(event, {{ item.post.id }})"></textarea>
                             <div class="postwall-form-button-container">
-
                                 <!-- Submit button too add comment -->
                                 <button type="submit" class="green-button" aria-label="Post comment">
                                     Post
                                 </button>
                             </div>
                         </div>
-                    </form>
 
+                    </form>
                 </div>
             </div>
         {% endfor %}
@@ -70,6 +70,7 @@
 </div>
 
 <!-- See Script for Description -->
-<script src="{% static 'js/comments.js' %}"></script>
+<script src="{% static 'js/comment.js' %}"></script>
 <script src="{% static 'js/scroll_to_post.js' %}"></script>
+
 {% endblock %}
