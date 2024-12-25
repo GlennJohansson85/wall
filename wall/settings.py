@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 import dj_database_url
+from django.contrib.messages import constants as messages
 
 # Base directory for the project
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -64,7 +65,6 @@ TEMPLATES = [
 ]
 
 # Alert Messages
-from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
