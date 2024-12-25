@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # Debug settings
-DEBUG = True
+DEBUG = False
 
 # URLs and Hosts
 ROOT_URLCONF = 'wall.urls'
