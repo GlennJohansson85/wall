@@ -122,6 +122,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Cloudinary will handle the media
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Media files (Cloudinary)
 CLOUDINARY_STORAGE = {
