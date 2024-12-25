@@ -1,1 +1,1 @@
-web: gunicorn wall.wsgi
+web: gunicorn wall.wsgi --log-file -
