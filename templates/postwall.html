@@ -48,10 +48,10 @@
                     <form method="post" action="{% url 'add_comment' item.post.id %}" id="comment-form-{{ item.post.id }}">
                         {% csrf_token %}
 
-                        <div class="postwall-form-container">
+                        <div class="postwall-container">
                             <textarea id="id_textarea" name="comment_text" rows="1" placeholder="Add Comment Here..."
                                 onkeypress="handleKeyPress(event, {{ item.post.id }})"></textarea>
-                            <div class="postwall-form-button-container">
+                            <div class="postwall-button-container">
                                 <!-- Submit button too add comment -->
                                 <button type="submit" class="green-button" aria-label="Post comment">
                                     Post
