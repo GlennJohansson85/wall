@@ -1,11 +1,14 @@
 from django.shortcuts import render, reverse, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from accounts.models import Profile
-from django.http import JsonResponse, HttpResponseForbidden
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse, HttpResponseForbidden
+
+from cloudinary import CloudinaryImage
+from cloudinary.uploader import upload
 
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
+from accounts.models import Profile
 
 
 def postwall(request):
@@ -33,35 +36,52 @@ def post(request):
             post = form.save(commit=False)
             post.user = request.user
 
+            # Handle the image upload with Cloudinary transformation
+            if post.img:
+                file = post.img
+
+                # Apply transformation if the file is too large
+                max_size = 10 * 1024 * 1024  # 10 MB
+                if file.size > max_size:
+                    # Use CloudinaryImage to apply transformation before upload
+                    transformed_image = CloudinaryImage(file.name).image(
+                        transformation=[
+                            {'width': 1000, 'crop': 'scale'},
+                            {'quality': 'auto'},
+                            {'fetch_format': 'auto'}
+                        ]
+                    )
+                    post.img = transformed_image
+                else:
+                    # If the file is small enough, upload it without transformation
+                    transformed_image = upload(file)
+                    post.img = transformed_image['secure_url']
+
             # If no image is uploaded, set the default image
             if not post.img:
                 post.img = 'uploads/no-img.png'
 
+            # Save the post to the database
             post.save()
             messages.success(request, "Your post was created successfully!")
             return redirect('postwall')
 
         else:
-            # Check which fields are missing and add specific error messages
+            # Handle form errors
             if form.errors.get('title'):
                 messages.error(request, "Title required")
             elif form.errors.get('content'):
                 messages.error(request, "Content required")
             else:
-                # If both title and content are missing
                 messages.error(request, "Title and Content required")
 
-            context = {
-                'form': form
-            }
+            context = {'form': form}
             return render(request, 'post.html', context)
 
     else:
         form = PostForm()
 
-    context = {
-        'form': form
-    }
+    context = {'form': form}
     return render(request, 'post.html', context)
 
 
