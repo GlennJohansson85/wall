@@ -44,14 +44,12 @@ def post(request):
                 max_size = 13 * 1024 * 1024  # 13 MB
                 if file.size > max_size:
                     # Use CloudinaryImage to apply transformation before upload
-                    transformed_image = CloudinaryImage(file.name).image(
-                        transformation=[
-                            {'width': 1000, 'crop': 'scale'},
-                            {'quality': 'auto'},
-                            {'fetch_format': 'auto'}
-                        ]
-                    )
-                    post.img = transformed_image
+                    transformed_image = upload(file, transformation=[
+                        {'width': 1000, 'crop': 'scale'},
+                        {'quality': 'auto'},
+                        {'fetch_format': 'auto'}
+                    ])
+                    post.img = transformed_image['secure_url']
                 else:
                     # If the file is small enough, upload it without transformation
                     transformed_image = upload(file)
