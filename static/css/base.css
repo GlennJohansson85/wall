@@ -510,6 +510,18 @@ input:-webkit-autofill {
 	text-align: center;
 }
 
+#fileSize {
+    font-family: "SinkinSans-500Medium", "Sans-Serif";
+}
+
+.valid-size {
+    color: rgb(181, 249, 181);
+}
+
+.invalid-size {
+    color: rgb(255, 134, 134);
+}
+
 /* Post_Detail.html */
 .post_detail-container {
 	border-radius: 5px;

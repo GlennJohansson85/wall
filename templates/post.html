@@ -30,7 +30,8 @@
                         <!-- Image Field -->
                         <div class="post-form">
                             <label for="id_img" class="form-label">Image:</label>
-                            <input class="form-control" type="file" id="id_img" name="img" onchange="return validateFileSizeAndResize()">
+                            <input class="form-control" type="file" id="fileInput" name="img" accept="image/*" onchange="return validateFileSizeAndResize()">
+                            <p id="fileSize"></p>
                         </div>
 
                         <!-- Submit Button -->
@@ -42,4 +43,7 @@
             </div>
         </div>
     </div>
+
+    <!-- Include the JavaScript File -->
+    <script src="{% static 'js/file_size.js' %}"></script>
 {% endblock %}

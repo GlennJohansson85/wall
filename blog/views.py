@@ -5,6 +5,7 @@ from django.http import JsonResponse, HttpResponseForbidden
 
 from cloudinary import CloudinaryImage
 from cloudinary.uploader import upload
+from django.core.exceptions import ValidationError
 
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
@@ -26,37 +27,46 @@ def postwall(request):
     return render(request, "postwall.html", context)
 
 
+
 @login_required
 def post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = PostForm(request.POST, request.FILES)  # Ensure files are passed
 
-        # Check if form is valid
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
 
-            # Handle the image upload with Cloudinary transformation
-            if post.img:
-                file = post.img
+            # If there is an image uploaded
+            if 'img' in request.FILES and request.FILES['img']:
+                img_file = request.FILES['img']
 
-                # Apply transformation if the file is too large
+                # Check the file size before uploading
                 max_size = 13 * 1024 * 1024  # 13 MB
-                if file.size > max_size:
-                    transformed_image = upload(file, transformation=[
-                        {'width': 1000, 'crop': 'scale'},
-                        {'quality': 'auto'},
-                        {'fetch_format': 'auto'}
-                    ])
-                    post.img = transformed_image['secure_url']
-                else:
-                    # If the file is small enough, upload it without transformation
-                    transformed_image = upload(file)
-                    post.img = transformed_image['secure_url']
+                if img_file.size > max_size:
+                    messages.error(request, "File size exceeds the 13 MB limit.")
+                    context = {'form': form}
+                    return render(request, 'post.html', context)
 
-            # If no image is uploaded, set the default image
-            if not post.img:
-                post.img = 'uploads/no-img.png'
+                # Check if the uploaded file is an image (optional, but good for validation)
+                if not img_file.content_type.startswith('image/'):
+                    messages.error(request, "The file must be an image.")
+                    context = {'form': form}
+                    return render(request, 'post.html', context)
+
+                # Upload to Cloudinary
+                try:
+                    upload_result = upload(img_file)
+
+                    # Save the uploaded image URL to the post
+                    post.img = upload_result['secure_url']
+                except Exception as e:
+                    messages.error(request, f"An error occurred during image upload: {str(e)}")
+                    context = {'form': form}
+                    return render(request, 'post.html', context)
+            else:
+                # If no image uploaded, set default image
+                post.img = 'uploads/no-img.png'  # Path to your default image
 
             # Save the post to the database
             post.save()
@@ -64,14 +74,14 @@ def post(request):
             return redirect('postwall')
 
         else:
-            # Handle form errors
+            # Handle form errors if the form is not valid
             if not form.cleaned_data.get('title') and not form.cleaned_data.get('content'):
-                messages.error(request, "Title and Content required")
+                messages.error(request, "Title and Content are required.")
             else:
                 if form.errors.get('title'):
-                    messages.error(request, "Title required")
+                    messages.error(request, "Title is required.")
                 if form.errors.get('content'):
-                    messages.error(request, "Content required")
+                    messages.error(request, "Content is required.")
 
             context = {'form': form}
             return render(request, 'post.html', context)
