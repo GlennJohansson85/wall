@@ -10,7 +10,7 @@
             <div class="stroke-1">
                 <div class="post-header">Create a New Post</div>
                 <div class="post-form-container">
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="POST" enctype="multipart/form-data" onsubmit="return validateFileSizeAndResize()">
                         {% csrf_token %}
 
                         <!-- Title Field -->
@@ -30,7 +30,7 @@
                         <!-- Image Field -->
                         <div class="post-form">
                             <label for="id_img" class="form-label">Image:</label>
-                            <input class="form-control" type="file" id="id_img" name="img"/>
+                            <input class="form-control" type="file" id="id_img" name="img" onchange="return validateFileSizeAndResize()">
                         </div>
 
                         <!-- Submit Button -->
@@ -42,4 +42,8 @@
             </div>
         </div>
     </div>
+
+
+<script src="{% static 'js/file-size-validation.js' %}"></script>
+
 {% endblock %}
