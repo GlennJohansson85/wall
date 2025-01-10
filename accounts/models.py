@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from cloudinary.models import CloudinaryField
 
 
 class ProfileManager(BaseUserManager):
@@ -64,23 +65,23 @@ class Profile(AbstractBaseUser):
     with specific fields and behavior for authentication.
     """
 
-    username          = models.CharField(max_length=50, unique=True)
-    first_name        = models.CharField(max_length=50)
-    last_name         = models.CharField(max_length=50)
-    email             = models.EmailField(max_length=100, unique=True)
-    profile_picture   = models.ImageField(blank=True, upload_to='uploads/')
-    date_joined       = models.DateTimeField(auto_now_add=True)
-    last_login        = models.DateTimeField(auto_now=True)
-    is_admin          = models.BooleanField(default=False)
-    is_staff          = models.BooleanField(default=True)
-    is_active         = models.BooleanField(default=True)
-    is_inactive       = models.BooleanField(default=True)
-    is_published      = models.BooleanField(default=True)
+    username = models.CharField(max_length=50, unique=True)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=100, unique=True)
+    profile_picture = CloudinaryField('image', blank=True, null=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    last_login = models.DateTimeField(auto_now=True)
+    is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+    is_inactive = models.BooleanField(default=True)
+    is_published = models.BooleanField(default=True)
 
     # Specifies the field used for user login (email instead of username)
-    USERNAME_FIELD    = 'email'
+    USERNAME_FIELD = 'email'
     # Required fields when creating a user
-    REQUIRED_FIELDS   = ['username', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
     # Custom manager for the Profile model
     objects = ProfileManager()
