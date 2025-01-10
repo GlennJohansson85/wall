@@ -447,6 +447,11 @@ input:-webkit-autofill {
 	text-align: center;
 }
 
+.postwall-no-post {
+	font-family: "Cocogoose-Condensed-letterpress-trial", "Sans-Serif";
+	margin-top: 40px;
+	text-align: center;
+}
 /* Reset_Password.html */
 .reset_password_guide {
 	font-family: "SinkinSans-300Light", "Sans-Serif";
