@@ -41,7 +41,7 @@ def post(request):
                 file = post.img
 
                 # Apply transformation if the file is too large
-                max_size = 10 * 1024 * 1024  # 10 MB
+                max_size = 13 * 1024 * 1024  # 13 MB
                 if file.size > max_size:
                     # Use CloudinaryImage to apply transformation before upload
                     transformed_image = CloudinaryImage(file.name).image(
