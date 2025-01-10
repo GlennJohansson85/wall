@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %} Postwall - Edit Profile {% endblock %}
+
 {% block content %}
 	<div class="brickwall">
 		<div class="concrete">
@@ -29,6 +31,9 @@
 										Profile Picture:
 									</label>
 									{{ user_form.profile_picture }}
+								</div>
+								<div class="file-size-container">
+									<p id="fileSize"></p>
 								</div>
 								<hr/>
 								<!-- First Name Field -->
@@ -80,4 +85,6 @@
 			</div>
 		</div>
 	</div>
+
+	<script src="{% static 'file_size.js' %}"></script>
 {% endblock %}
