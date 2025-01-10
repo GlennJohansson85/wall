@@ -6,18 +6,9 @@
 {% block content %}
     <div class="brickwall">
         <div class="concrete">
+            {% include 'alerts.html' %}
             <div class="stroke-1">
                 <div class="post-header">Create a New Post</div>
-
-                <!-- Display Messages -->
-                {% if messages %}
-                    <div class="alert-container">
-                        {% for message in messages %}
-                            <div class="alert {{ message.tags }}">{{ message }}</div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-
                 <div class="post-form-container">
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -27,9 +18,6 @@
                             <label for="id_title" class="form-label">Title:</label>
                             <input class="form-control" type="text" id="id_title" name="title"
                                 placeholder="Title here..." value="{{ form.title.value|default:'' }}">
-                            {% if form.title.errors %}
-                                <div class="error">{{ form.title.errors }}</div>
-                            {% endif %}
                         </div>
 
                         <!-- Content Field -->
@@ -37,9 +25,6 @@
                             <label for="id_content" class="form-label">Content:</label>
                             <textarea class="form-control" id="id_content" name="content"
                                 rows="5" placeholder="Content here...">{{ form.content.value|default:'' }}</textarea>
-                            {% if form.content.errors %}
-                                <div class="error">{{ form.content.errors }}</div>
-                            {% endif %}
                         </div>
 
                         <!-- Image Field -->

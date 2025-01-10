@@ -51,7 +51,6 @@
                         <li class="post_detail-comments-li">
                             <strong>{{ comment.user.username }}:</strong> {{ comment.text }}
                             <!-- Delete Comments -->
-
                             {% if request.user == comment.user or request.user.is_admin %}
                                 <div class="post_detail-delete-comment-container">
                                     <form method="post" action="{% url 'delete_comment' comment_id=comment.id %}">

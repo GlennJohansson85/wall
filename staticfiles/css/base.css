@@ -45,7 +45,7 @@ body {
 
 html {
 	height: 100%;
-	background: url("/static/wallpapers/g-blackwhite.avif") no-repeat center center fixed;
+	background: url("/static/img/g-blackwhite.avif") no-repeat center center fixed;
 	background-size: cover;
 }
 
@@ -63,7 +63,7 @@ html {
 	background-color: #000;
 	border-left: 1px solid #000;
 	border-right: 1px solid #000;
-	background-image: url("/static/wallpapers/brickwall.webp");
+	background-image: url("/static/img/brickwall.webp");
 	box-shadow: inset 3vw 0px 1vw -1vw rgba(0, 0, 0, 0.11),
 		inset -3vw 0px 1vw -1vw rgba(0, 0, 0, 0.11);
 }
@@ -80,7 +80,7 @@ html {
 	border-style: inset;
 	border-color: #1b645e;
 	background-color: #000000ea;
-	background-image: url("/static/wallpapers/concrete-wall-2.png");
+	background-image: url("/static/img/concrete-wall-2.png");
 	background-size: 400px;
 	box-shadow: inset -1vw 0.5vw 0.5vw -0.5vw rgba(0, 0, 0, 0.5),
         inset 1vw -0.5vw 0.5vw -0.5vw rgba(0, 0, 0, 0.5),
@@ -89,42 +89,42 @@ html {
 }
 
 .stroke-1 {
-    background-image: url("/static/wallpapers/c5.webp");
+    background-image: url("/static/img/c5.webp");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .stroke-2 {
-    background-image: url("/static/wallpapers/c2.webp");
+    background-image: url("/static/img/c2.webp");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .stroke-3 {
-    background-image: url("/static/wallpapers/c1.webp");
+    background-image: url("/static/img/c1.webp");
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .stroke-4 {
-    background-image: url("/static/wallpapers/c10.webp");
+    background-image: url("/static/img/c10.webp");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .stroke-5 {
-    background-image: url("/static/wallpapers/c11.webp");
+    background-image: url("/static/img/c11.webp");
    	background-size: 100%;
     background-position: top center;
     background-repeat: no-repeat;
 }
 
 .stroke-6 {
-    background-image: url("/static/wallpapers/c7.webp");
+    background-image: url("/static/img/c7.webp");
    	background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -447,6 +447,11 @@ input:-webkit-autofill {
 	text-align: center;
 }
 
+.postwall-no-post {
+	font-family: "Cocogoose-Condensed-letterpress-trial", "Sans-Serif";
+	margin-top: 40px;
+	text-align: center;
+}
 /* Reset_Password.html */
 .reset_password_guide {
 	font-family: "SinkinSans-300Light", "Sans-Serif";

@@ -15,13 +15,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # Debug settings
-DEBUG = False
+DEBUG = True
 
 # URLs and Hosts
 ROOT_URLCONF = 'wall.urls'
 WSGI_APPLICATION = 'wall.wsgi.application'
-CSRF_TRUSTED_ORIGINS = ['https://wall-87216da9fac5.herokuapp.com']
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'wall-87216da9fac5.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://postwall-fde18acf5c20.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'postwall-fde18acf5c20.herokuapp.com']
 
 
 

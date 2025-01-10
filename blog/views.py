@@ -31,15 +31,31 @@ def post(request):
         # Check if form is valid
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user  # Save the current user to the post
+            post.user = request.user
+
+            # If no image is uploaded, set the default image
+            if not post.img:
+                post.img = 'media/uploads/no-img.png'
+
             post.save()
-            return redirect('postwall')  # Redirect to the postwall page after successful post
+            messages.success(request, "Your post was created successfully!")
+            return redirect('postwall')
+
         else:
-            # Form is not valid, show errors on the form
+            # Check which fields are missing and add specific error messages
+            if form.errors.get('title'):
+                messages.error(request, "Title required")
+            elif form.errors.get('content'):
+                messages.error(request, "Content required")
+            else:
+                # If both title and content are missing
+                messages.error(request, "Title and Content required")
+
             context = {
                 'form': form
             }
             return render(request, 'post.html', context)
+
     else:
         form = PostForm()
 
