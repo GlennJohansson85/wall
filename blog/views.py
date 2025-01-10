@@ -28,12 +28,18 @@ def post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
 
+        # Check if form is valid
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user
+            post.user = request.user  # Save the current user to the post
             post.save()
-            return redirect('postwall')
-
+            return redirect('postwall')  # Redirect to the postwall page after successful post
+        else:
+            # Form is not valid, show errors on the form
+            context = {
+                'form': form
+            }
+            return render(request, 'post.html', context)
     else:
         form = PostForm()
 
