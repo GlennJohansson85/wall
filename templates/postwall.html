@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load cloudinary %}
 
 {% block content %}
 <div class="brickwall">
@@ -22,7 +23,7 @@
                     <div class="postwall-image-container">
                         {% if item.post.img %}
                             <!-- Incl./excl. Image -->
-                            <img class="postwall-image" src="{{ item.post.img.url }}" alt="{{ item.post.title }}">
+                            <img class="postwall-image" src="{% cloudinary item.post.img width=1000 crop='scale' quality='auto' fetch_format='auto' %}" alt="{{ item.post.title }}">
                         {% endif %}
                     </div>
 

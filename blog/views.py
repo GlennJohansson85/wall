@@ -35,7 +35,7 @@ def post(request):
 
             # If no image is uploaded, set the default image
             if not post.img:
-                post.img = 'media/uploads/no-img.png'
+                post.img = 'uploads/no-img.png'
 
             post.save()
             messages.success(request, "Your post was created successfully!")
