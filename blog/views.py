@@ -68,12 +68,13 @@ def post(request):
 
         else:
             # Handle form errors
-            if form.errors.get('title'):
-                messages.error(request, "Title required")
-            elif form.errors.get('content'):
-                messages.error(request, "Content required")
-            else:
+            if not form.cleaned_data.get('title') and not form.cleaned_data.get('content'):
                 messages.error(request, "Title and Content required")
+            else:
+                if form.errors.get('title'):
+                    messages.error(request, "Title required")
+                if form.errors.get('content'):
+                    messages.error(request, "Content required")
 
             context = {'form': form}
             return render(request, 'post.html', context)
