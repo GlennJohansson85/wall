@@ -9,23 +9,33 @@
 				<div class="post-form-container">
 					<form method="post" enctype="multipart/form-data">
 						{% csrf_token %}
+
 						<!-- Title Field -->
 						<div class="post-form">
 							<label for="id_title" class="form-label">Title:</label>
 							<input class="form-control" type="text" id="id_title" name="title"
-								placeholder="Title here..."/>
+								placeholder="Title here..." value="{{ form.title.value }}">
+							{% if form.title.errors %}
+								<div class="error">{{ form.title.errors }}</div>
+							{% endif %}
 						</div>
+
 						<!-- Content Field -->
 						<div class="post-form">
 							<label for="id_content" class="form-label">Content:</label>
 							<textarea class="form-control" id="id_content" name="content"
-								rows="5" placeholder="Content here..."></textarea>
+								rows="5" placeholder="Content here...">{{ form.content.value }}</textarea>
+							{% if form.content.errors %}
+								<div class="error">{{ form.content.errors }}</div>
+							{% endif %}
 						</div>
+
 						<!-- Image Field -->
 						<div class="post-form">
 							<label for="id_img" class="form-label">Image:</label>
-							<input class="form-control" type="file" id="id_img" name="img"/>
+							<input class="form-control" type="file" id="id_img" name="img" value="{{ form.img.value }}">
 						</div>
+
 						<!-- Submit Button -->
 						<div class="post-button-container">
 							<button type="submit" class="green-button">Post</button>
