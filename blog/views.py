@@ -26,8 +26,6 @@ def postwall(request):
     return render(request, "postwall.html", context)
 
 
-from cloudinary.uploader import upload
-
 @login_required
 def post(request):
     if request.method == 'POST':
@@ -42,24 +40,19 @@ def post(request):
             if post.img:
                 file = post.img
 
-                # Ensure that file is a Django file-like object
-                if hasattr(file, 'size'):
-                    # Apply transformation if the file is too large
-                    max_size = 13 * 1024 * 1024  # 13 MB
-                    if file.size > max_size:
-                        # Apply Cloudinary transformation
-                        transformed_image = upload(file, transformation=[{
-                            'width': 1000, 'crop': 'scale'
-                        }, {
-                            'quality': 'auto'
-                        }, {
-                            'fetch_format': 'auto'
-                        }])
-                        post.img = transformed_image['secure_url']
-                    else:
-                        # If the file is small enough, upload it without transformation
-                        transformed_image = upload(file)
-                        post.img = transformed_image['secure_url']
+                # Apply transformation if the file is too large
+                max_size = 13 * 1024 * 1024  # 13 MB
+                if file.size > max_size:
+                    transformed_image = upload(file, transformation=[
+                        {'width': 1000, 'crop': 'scale'},
+                        {'quality': 'auto'},
+                        {'fetch_format': 'auto'}
+                    ])
+                    post.img = transformed_image['secure_url']
+                else:
+                    # If the file is small enough, upload it without transformation
+                    transformed_image = upload(file)
+                    post.img = transformed_image['secure_url']
 
             # If no image is uploaded, set the default image
             if not post.img:
@@ -88,6 +81,31 @@ def post(request):
 
     context = {'form': form}
     return render(request, 'post.html', context)
+
+
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    comments = post.comments.all()
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+
+        if comment_form.is_valid():
+            profile = get_object_or_404(Profile, user=request.user)
+            comment_form.save(user=profile, post=post)
+            return redirect('postwall')
+
+    else:
+        comment_form = CommentForm()
+
+    context = {
+        'post': post,
+        'comments': comments,
+        'comment_form': comment_form,
+        'user': request.user,
+    }
+
+    return render(request, 'post_detail.html', context)
 
 
 @login_required
