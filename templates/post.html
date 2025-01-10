@@ -1,48 +1,60 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %} Postwall - Create a New Post {% endblock %}
+
 {% block content %}
-	<div class="brickwall">
-		<div class="concrete">
-			<div class="stroke-1">
-				<div class="post-header">Create a New Post</div>
-				<div class="post-form-container">
-					<form method="post" enctype="multipart/form-data">
-						{% csrf_token %}
+    <div class="brickwall">
+        <div class="concrete">
+            <div class="stroke-1">
+                <div class="post-header">Create a New Post</div>
 
-						<!-- Title Field -->
-						<div class="post-form">
-							<label for="id_title" class="form-label">Title:</label>
-							<input class="form-control" type="text" id="id_title" name="title"
-								placeholder="Title here..." value="{{ form.title.value }}">
-							{% if form.title.errors %}
-								<div class="error">{{ form.title.errors }}</div>
-							{% endif %}
-						</div>
+                <!-- Display Messages -->
+                {% if messages %}
+                    <div class="alert-container">
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
-						<!-- Content Field -->
-						<div class="post-form">
-							<label for="id_content" class="form-label">Content:</label>
-							<textarea class="form-control" id="id_content" name="content"
-								rows="5" placeholder="Content here...">{{ form.content.value }}</textarea>
-							{% if form.content.errors %}
-								<div class="error">{{ form.content.errors }}</div>
-							{% endif %}
-						</div>
+                <div class="post-form-container">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
 
-						<!-- Image Field -->
-						<div class="post-form">
-							<label for="id_img" class="form-label">Image:</label>
-							<input class="form-control" type="file" id="id_img" name="img" value="{{ form.img.value }}">
-						</div>
+                        <!-- Title Field -->
+                        <div class="post-form">
+                            <label for="id_title" class="form-label">Title:</label>
+                            <input class="form-control" type="text" id="id_title" name="title"
+                                placeholder="Title here..." value="{{ form.title.value|default:'' }}">
+                            {% if form.title.errors %}
+                                <div class="error">{{ form.title.errors }}</div>
+                            {% endif %}
+                        </div>
 
-						<!-- Submit Button -->
-						<div class="post-button-container">
-							<button type="submit" class="green-button">Post</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+                        <!-- Content Field -->
+                        <div class="post-form">
+                            <label for="id_content" class="form-label">Content:</label>
+                            <textarea class="form-control" id="id_content" name="content"
+                                rows="5" placeholder="Content here...">{{ form.content.value|default:'' }}</textarea>
+                            {% if form.content.errors %}
+                                <div class="error">{{ form.content.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Image Field -->
+                        <div class="post-form">
+                            <label for="id_img" class="form-label">Image:</label>
+                            <input class="form-control" type="file" id="id_img" name="img"/>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="post-button-container">
+                            <button type="submit" class="green-button">Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
