@@ -962,12 +962,6 @@ input:-webkit-autofill {
 		text-align: center;
 	}
 
-	.post-img {
-		border-radius: 5px;
-		border-style: inset;
-		border-color: #000;
-	}
-
 	.post_detail-content {
 		font-family: "SinkinSans-300Light", "Sans-Serif";
 		font-size: 16px;
@@ -1110,12 +1104,6 @@ input:-webkit-autofill {
 
 	.post_detail-image-container {
 		text-align: center;
-	}
-
-	.post-img {
-		border-radius: 5px;
-		border-style: inset;
-		border-color: #000;
 	}
 
 	.post_detail-content {
@@ -1268,12 +1256,6 @@ input:-webkit-autofill {
 
 	.post_detail-image-container {
 		text-align: center;
-	}
-
-	.post-img {
-		border-radius: 5px;
-		border-style: inset;
-		border-color: #000;
 	}
 
 	.post_detail-content {
