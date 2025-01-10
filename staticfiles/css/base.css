@@ -89,42 +89,42 @@ html {
 }
 
 .stroke-1 {
-    background-image: url("/static/wallpapers/c5.png");
+    background-image: url("/static/wallpapers/c5.webp");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .stroke-2 {
-    background-image: url("/static/wallpapers/c2.png");
+    background-image: url("/static/wallpapers/c2.webp");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .stroke-3 {
-    background-image: url("/static/wallpapers/c1.png");
+    background-image: url("/static/wallpapers/c1.webp");
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .stroke-4 {
-    background-image: url("/static/wallpapers/c10.png");
+    background-image: url("/static/wallpapers/c10.webp");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .stroke-5 {
-    background-image: url("/static/wallpapers/c11.png");
+    background-image: url("/static/wallpapers/c11.webp");
    	background-size: 100%;
     background-position: top center;
     background-repeat: no-repeat;
 }
 
 .stroke-6 {
-    background-image: url("/static/wallpapers/c7.png");
+    background-image: url("/static/wallpapers/c7.webp");
    	background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -962,12 +962,6 @@ input:-webkit-autofill {
 		text-align: center;
 	}
 
-	.post-img {
-		border-radius: 5px;
-		border-style: inset;
-		border-color: #000;
-	}
-
 	.post_detail-content {
 		font-family: "SinkinSans-300Light", "Sans-Serif";
 		font-size: 16px;
@@ -1110,12 +1104,6 @@ input:-webkit-autofill {
 
 	.post_detail-image-container {
 		text-align: center;
-	}
-
-	.post-img {
-		border-radius: 5px;
-		border-style: inset;
-		border-color: #000;
 	}
 
 	.post_detail-content {
@@ -1268,12 +1256,6 @@ input:-webkit-autofill {
 
 	.post_detail-image-container {
 		text-align: center;
-	}
-
-	.post-img {
-		border-radius: 5px;
-		border-style: inset;
-		border-color: #000;
 	}
 
 	.post_detail-content {
