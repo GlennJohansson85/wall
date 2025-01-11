@@ -14,28 +14,28 @@
 						<div class="col-md-12">
 							<div class="profile-picture-container">
 								{% if user_form.instance.profile_picture %}
-								<img
-									class="profile-picture"
-									src="{{ user_form.instance.profile_picture.url }}"
-									alt="Profile Picture"
-								/>
+									<img
+										class="profile-picture"
+										src="{{ user_form.instance.profile_picture.url }}"
+										alt="Profile Picture"
+									/>
+								{% else %}
+								    <p>No profile picture set.</p>
 								{% endif %}
 							</div>
-							<form class="edit_profile-form" id="id_edit_profile"
-								action="{% url 'edit_profile' %}" method="POST"
-								enctype="multipart/form-data">
-								{% csrf_token %}
+							<form method="POST" class="edit_profile-form" action="{% url 'edit_profile' %}"
+                                  enctype="multipart/form-data" onsubmit="return validateFileSizeAndResize()">
+                                {% csrf_token %}
+
 								<!-- Profile Picture Upload -->
-								<div class="form-group">
-									<label class="form-label" for="id_profile_picture">
-										Profile Picture:
-									</label>
-									{{ user_form.profile_picture }}
-								</div>
-								<div class="file-size-container">
-									<p id="fileSize"></p>
-								</div>
-								<hr/>
+                                <div class="form-group">
+                                    <label class="form-label" for="profile_picture">Profile Picture:</label>
+                                    <input class="form-control" type="file" id="id_profile_picture" name="profile_picture" accept="image/*" onchange="return validateFileSizeAndResize(event)">
+                                </div>
+                                <div class="file-size-container">
+                                    <p id="fileSize"></p>
+                                </div>
+
 								<!-- First Name Field -->
 								<div class="form-group">
 									<label class="form-label" for="id_first_name">
@@ -86,5 +86,5 @@
 		</div>
 	</div>
 
-	<script src="{% static 'file_size.js' %}"></script>
+	<script src="{% static 'js/file_size.js' %}"></script>
 {% endblock %}

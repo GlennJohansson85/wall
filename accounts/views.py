@@ -8,6 +8,10 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.decorators import login_required
 
+from cloudinary import CloudinaryImage
+from cloudinary.uploader import upload
+from django.core.exceptions import ValidationError
+
 import requests
 
 from .forms import RegistrationForm, UserForm
@@ -204,49 +208,67 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 
-@login_required(login_url='login')
+@login_required
 def edit_profile(request):
-    """
-    Allows the authenticated user to edit their profile information.
-    Handles both GET and POST requests to display the form and process updates.
-    If the form is valid and changes are made, the profile is updated,
-    and a success message is displayed. If no changes are made or if
-    there are form errors, appropriate messages are shown.
-    """
-
-    # If the request method is POST (i.e., the form has been submitted)
     if request.method == 'POST':
-        # Create a form instance with the submitted data and the current user's data
         user_form = UserForm(request.POST, request.FILES, instance=request.user)
 
-        # If the form is valid
-        if user_form.is_valid():
-            # If changes has been made to the form
-            if user_form.has_changed():
-                # Save the updated profile informatio
-                user_form.save()
-                # Display a success message for profile update
-                messages.success(request, 'Your profile has been updated')
+        # Check form is valid and if the profile picture size is acceptable
+        if 'profile_picture' in request.FILES and request.FILES['profile_picture']:
+            profile_picture = request.FILES['profile_picture']
 
-            # If no changes have been made to the form
+            # Check the file size before any processing
+            max_size = 13 * 1024 * 1024  # 13 MB
+            if profile_picture.size > max_size:
+                messages.error(request, "The file size exceeds the 13 MB limit. Please upload a smaller image.")
+
+                # Re-render the form with an error message
+                context = {'user_form': user_form}
+                return render(request, 'edit_profile.html', context)
+
+        # If the form is valid, proceed with saving the data
+        if user_form.is_valid():
+            user = user_form.save(commit=False)
+
+            # If a profile picture was uploaded, handle its upload
+            if 'profile_picture' in request.FILES and request.FILES['profile_picture']:
+                profile_picture = request.FILES['profile_picture']
+
+                # Check if the uploaded file is an image
+                if not profile_picture.content_type.startswith('image/'):
+                    messages.error(request, "The file must be an image.")
+                    context = {'user_form': user_form}
+                    return render(request, 'edit_profile.html', context)
+
+                try:
+                    # Upload to Cloudinary
+                    upload_result = upload(profile_picture)
+                    user.profile_picture = upload_result['secure_url']
+                except Exception as e:
+                    messages.error(request, f"An error occurred during image upload: {str(e)}")
+                    context = {'user_form': user_form}
+                    return render(request, 'edit_profile.html', context)
+
             else:
-                # Show an error message indicating that no changes were made
-                messages.error(request, 'No changes has been made')
-            # Redirect to the profile page to avoid resubmission on refresh
+                # If no profile picture uploaded, use a default image
+                user.profile_picture = 'uploads/no-img.png'
+
+            user.save()  # Save the updated user profile
+            messages.success(request, "Your profile has been updated successfully!")
             return redirect('edit_profile')
 
-        # If the form is not valid
         else:
-            # Handle invalid form errors if needed
-            messages.error(request, 'There was an error with your submission')
+            # Handle form validation errors
+            messages.error(request, "There was an error with your form. Please check the fields and try again.")
+            context = {'user_form': user_form}
+            return render(request, 'edit_profile.html', context)
 
-    # If the request method is GET (i.e., the form has not been submitted)
     else:
-        # Create a form instance with the current user's data to pre-fill the form fields
+        # Render the form with the current user instance if it's a GET request
         user_form = UserForm(instance=request.user)
 
-    # Render the edit profile template with the user form
-    return render(request, 'edit_profile.html', {'user_form': user_form})
+    context = {'user_form': user_form}
+    return render(request, 'edit_profile.html', context)
 
 
 @login_required(login_url='login')
