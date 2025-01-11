@@ -12,7 +12,7 @@
 				<main class="col-md-7">
 					<div class="stroke-5">
 						<div class="col-md-12">
-							<div class="profile-picture-container">
+							<div class="profile_picture-container">
 								{% if user_form.instance.profile_picture %}
 									<img
 										class="profile-picture"
@@ -32,9 +32,7 @@
                                     <label class="form-label" for="profile_picture">Profile Picture:</label>
                                     <input class="form-control" type="file" id="id_profile_picture" name="profile_picture" accept="image/*" onchange="return validateFileSizeAndResize(event)">
                                 </div>
-                                <div class="file-size-container">
-                                    <p id="fileSize"></p>
-                                </div>
+                                <p id="fileSize"></p>
 
 								<!-- First Name Field -->
 								<div class="form-group">

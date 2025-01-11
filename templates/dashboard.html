@@ -13,11 +13,13 @@
 							<p class="dashboard-text">Logged in as:
 								<span>{{ user.username }}</span>
 							</p>
-							<img
-								class="profile-picture"
-								src="{{ profile_picture_url }}"
-								alt="{{ user.username }}'s Profile Picture"
-							/>
+							<div class="profile_picture-container">
+								<img
+									class="profile-picture"
+									src="{{ profile_picture_url }}"
+									alt="{{ user.username }}'s Profile Picture"
+								/>
+							</div>
 							<p class="dashboard-text">
 								<span>{{ user.email }}</span>
 							</p>
