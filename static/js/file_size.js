@@ -22,7 +22,6 @@ document.getElementById('fileInput').addEventListener('change', function(event) 
         // Check if the file size exceeds the limit (13 MB)
         const maxSize = 13 * 1024 * 1024;  // 13 MB
         if (fileSize > maxSize) {
-            fileSizeDisplay.textContent += ' (File exceeds 13 MB limit)';
             fileSizeDisplay.classList.add('invalid-size');  // Apply red color if exceeds limit
         } else {
             fileSizeDisplay.classList.add('valid-size');  // Apply green color if within limit

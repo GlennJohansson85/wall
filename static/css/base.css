@@ -518,24 +518,27 @@ input:-webkit-autofill {
 #fileSize {
     font-family: "SinkinSans-500Medium", "Sans-Serif";
 	font-size: 12px;
-	padding-left: 80px;
 }
 
 .valid-size {
-    color: rgb(181, 249, 181);
 	padding: 5px;
+	text-align: center;
+    color: rgb(181, 249, 181);
 	background-color: #000000ae;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
 
 .invalid-size {
-    color: rgb(255, 134, 134);
 	padding: 5px;
+	text-align: center;
+    color: rgb(255, 134, 134);
 	background-color: #000000ae;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
+
+
 
 /* Post_Detail.html */
 .post_detail-container {
