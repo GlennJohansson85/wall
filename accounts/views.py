@@ -221,8 +221,6 @@ def edit_profile(request):
             max_size = 13 * 1024 * 1024  # 13 MB
             if profile_picture.size > max_size:
                 messages.error(request, "The file size exceeds the 13 MB limit. Please upload a smaller image.")
-
-                # Re-render the form with an error message
                 context = {'user_form': user_form}
                 return render(request, 'edit_profile.html', context)
 
@@ -241,17 +239,17 @@ def edit_profile(request):
                     return render(request, 'edit_profile.html', context)
 
                 try:
-                    # Upload to Cloudinary
+                    # Upload to Cloudinary (or other cloud storage)
                     upload_result = upload(profile_picture)
                     user.profile_picture = upload_result['secure_url']
                 except Exception as e:
                     messages.error(request, f"An error occurred during image upload: {str(e)}")
                     context = {'user_form': user_form}
                     return render(request, 'edit_profile.html', context)
-
             else:
-                # If no profile picture uploaded, use a default image
-                user.profile_picture = 'uploads/no-img.png'
+                # If no profile picture uploaded, keep the current profile picture
+                # This line is the key to maintaining the existing profile picture.
+                user.profile_picture = request.user.profile_picture
 
             user.save()  # Save the updated user profile
             messages.success(request, "Your profile has been updated successfully!")
@@ -269,6 +267,7 @@ def edit_profile(request):
 
     context = {'user_form': user_form}
     return render(request, 'edit_profile.html', context)
+
 
 
 @login_required(login_url='login')

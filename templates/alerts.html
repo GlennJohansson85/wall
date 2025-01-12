@@ -1,13 +1,6 @@
-{% load static %}
-
-<div class="alert-container">
+<div class="alert-c">
     {% for message in messages %}
-        <div class="alert alert-success fade show" role="alert">
-            {{ message }}
-            <!-- Close Button -->
-            <button type="button" class="close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+        <div class="alert" role="alert">{{ message }}</div>
     {% endfor %}
 </div>
+

@@ -30,7 +30,6 @@
     <script src="{% static 'js/scroll_to_post.js' %}"></script>
     <script src="{% static 'js/delete_confirmation.js' %}" defer></script>
     <script src="{% static 'js/file_size.js' %}"></script>
-    {% block extra_scripts %}{% endblock %}
 </head>
 <body>
 
@@ -40,13 +39,12 @@
     <!-- Alert Messages -->
     {% include 'alerts.html' %}
 
-    <!-- Content -->
     {% block content %}
-        <!-- Child Templats -->
     {% endblock %}
 
     <!-- Footer -->
     {% include 'footer.html' %}
 
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>

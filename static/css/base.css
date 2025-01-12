@@ -916,53 +916,32 @@ input:-webkit-autofill {
 	border: 3px solid #000;
 }
 
-/* Alert.html */
-.alert-container {
-    font-family: "SinkinSans-500Medium", "Sans-Serif";
-    font-size: 14px;
-    position: fixed;
+/* Alerts.html */
+.alert-c {
+	font-family: "SinkinSans-500Medium", "Sans-Serif";
+	font-size: 14px;
+    text-align: center;
     padding: 10px;
+    position: fixed;
     top: 100px;
     left: 50%;
     z-index: 1050;
     opacity: 1;
-    transition: opacity 2s linear;
+    transition: opacity 1s linear;
     transform: translateX(-50%);
 }
 
 .alert {
-    position: relative;
-    padding-right: 30px;
-    margin: 10px 0;
-	border: 2px inset #ffe95c;
-    border-radius: 5px;
-	color: #ffe95c;
-	background: linear-gradient(to right, #1d1d1d, #3a3939);
-	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.712);
-}
-
-.alert .close {
-    position: absolute;
-    top: 10px;
-    right: 5px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    color: #ffe95c;
-    cursor: pointer;
-	transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.alert .close:hover {
-	color: #f106a2;
-	transform: scale(1.5);
+  color: #ffe95c;
+  border: 2px outset #ffe95c;
+  background: linear-gradient(to right, #1d1d1dc3, #3a3939d5);
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.712);
 }
 
 .alert.fade-out {
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 2s linear, visibility 0s 2s;
 }
+
 
 /* Small Screens */
 @media (max-width: 768px) {
