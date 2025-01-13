@@ -6,11 +6,11 @@ function formatFileSize(bytes) {
     return (bytes / Math.pow(1024, i)).toFixed(2) + ' ' + sizes[i]; // Return formatted size
 }
 
-// Handling file input change (Post & Edit Profile)
-function validateFileSizeAndResize(event) {
+// Handling file input change (Post Image)
+function validatePostImageFileSizeAndResize(event) {
     const inputElement = event.target;
     const file = inputElement.files[0]; // Get the selected file
-    const fileSizeDisplay = document.getElementById('fileSize'); // Display File Size
+    const fileSizeDisplay = document.getElementById('fileSizePost'); // Display File Size
 
     if (file) {
         const fileSize = file.size; // Get the file size in bytes
@@ -34,34 +34,7 @@ function validateFileSizeAndResize(event) {
     }
 }
 
-// Handle form submission (triggered by submit button)
-function handleFormSubmit(event) {
-    const fileInput = document.getElementById('fileInput');
-    const fileInputProfile = document.getElementById('id_profile_picture');
-
-    // Validate the file size for both inputs
-    const isFileValid = validateFileSizeAndResize({ target: fileInput }) && validateFileSizeAndResize({ target: fileInputProfile });
-
-    // If any file size is invalid, prevent form submission
-    if (!isFileValid) {
-        event.preventDefault(); // Prevent form submission
-        alert("File size exceeds the 13 MB limit.");
-        return false; // Prevent form submission
-    }
-
-    return true; // Proceed with form submission
-}
-
-// Event listener for file input changes
+// Event listener for post image file input changes
 document.getElementById('fileInput').addEventListener('change', function(event) {
-    validateFileSizeAndResize(event); // Validate when the post image input changes
-});
-
-document.getElementById('id_profile_picture').addEventListener('change', function(event) {
-    validateFileSizeAndResize(event); // Validate when the profile picture input changes
-});
-
-// Event listener for submit button (name="submit")
-document.querySelector('button[name="submit"]').addEventListener('click', function(event) {
-    handleFormSubmit(event); // Handle form submission
+    validatePostImageFileSizeAndResize(event); // Validate when the post image input changes
 });

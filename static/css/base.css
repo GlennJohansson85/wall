@@ -519,7 +519,8 @@ input:-webkit-autofill {
 	text-align: center;
 }
 
-#fileSize {
+#fileSizePost,
+#fileSizeProfile {
     font-family: "SinkinSans-500Medium", "Sans-Serif";
 	font-size: 12px;
 }

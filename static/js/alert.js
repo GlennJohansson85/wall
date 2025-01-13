@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Loop through each alert message
     alertMessages.forEach(function(alertMessage) {
 
-        // Timeout to start the fade-out process after 3 seconds
+        // Timeout to start the fade-out process after 4 seconds
         setTimeout(function() {
             alertMessage.classList.add('fade-out'); // Class to initiate fade-out
 
@@ -15,6 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
             alertMessage.addEventListener('transitionend', function() {
                 alertMessage.remove(); // Remove alert message from the DOM after fade-out
             });
-        }, 3000); // Delay before fade-out starts
+        }, 4000); // Delay before fade-out starts
     });
 });

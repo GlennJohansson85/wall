@@ -28,11 +28,11 @@
                                 {% csrf_token %}
 
 								<!-- Profile Picture Upload -->
-                                <div class="form-group">
-                                    <label class="form-label" for="profile_picture">Profile Picture:</label>
-                                    <input class="form-control" type="file" id="id_profile_picture" name="profile_picture" accept="image/*" onchange="return validateFileSizeAndResize(event)">
-                                </div>
-                                <p id="fileSize"></p>
+								<div class="form-group">
+								    <label class="form-label" for="id_profile_picture">Profile Picture:</label>
+								    <input class="form-control" type="file" id="id_profile_picture" name="profile_picture" accept="image/*" onchange="return validateProfilePictureFileSizeAndResize(event)">
+								</div>
+								<p id="fileSizeProfile"></p>
 
 								<!-- First Name Field -->
 								<div class="form-group">
@@ -83,6 +83,8 @@
 			</div>
 		</div>
 	</div>
+{% endblock %}
 
-	<script src="{% static 'js/file_size.js' %}"></script>
+{% block extra_scripts %}
+    <script src="{% static 'js/filesize-profile.js' %}"></script>
 {% endblock %}
