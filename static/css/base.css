@@ -316,9 +316,9 @@ input:-webkit-autofill {
 	border-color: #1b645e;
 	background-color: #fff9ef;
 	box-shadow: -0.5vw 0.25vw 0.25vw -0.25vw rgba(0, 0, 0, 0.5),
-        0.5vw -0.25vw 0.25vw -0.25vw rgba(0, 0, 0, 0.5),
-		0.25vw 0.5vw 0.25vw -0.25vw rgba(0, 0, 0, 0.5),
-		-0.25vw -0.5vw 0.25vw -0.25vw rgba(0, 0, 0, 0.5);
+        		0.5vw -0.25vw 0.25vw -0.25vw rgba(0, 0, 0, 0.5),
+				0.25vw 0.5vw 0.25vw -0.25vw rgba(0, 0, 0, 0.5),
+				-0.25vw -0.5vw 0.25vw -0.25vw rgba(0, 0, 0, 0.5);
 }
 
 .postwall-title {
@@ -394,8 +394,12 @@ input:-webkit-autofill {
 	border-radius: 5px;
 	box-sizing: border-box;
 	background-color: #2f3d3ca9;
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: -0.5vw 0.25vw 0.25vw -0.25vw rgba(0, 0, 0, 0.5),
+        		0.5vw -0.25vw 0.25vw -0.25vw rgba(0, 0, 0, 0.5),
+				0.25vw 0.5vw 0.25vw -0.25vw rgba(0, 0, 0, 0.5),
+				-0.25vw -0.5vw 0.25vw -0.25vw rgba(0, 0, 0, 0.5);
 }
+
 
 .postwall-comments-header {
 	font-family: "Cocogoose-Condensed-letterpress-trial", "Sans-Serif";
@@ -1303,7 +1307,7 @@ input:-webkit-autofill {
 	}
 
 	.post_detail-title {
-		font-size: 40px;
+		font-size: 50px;
 	}
 
 	.post_detail-image-container {

@@ -17,7 +17,7 @@
 			</ul>
 
 			<!-- Toggler -->
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 				aria-expanded="false" aria-label="Toggle navigation">
 				{% if user.is_authenticated and profile_picture_url %}
@@ -63,7 +63,7 @@
 						<a class="nav-link {% if request.resolver_match.url_name == 'profile' %} active {% endif %}"
 							href="{% if user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'login' %}{% endif %}"
 							id="profiledropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							{% if user.is_authenticated and profile_picture_url %}	
+							{% if user.is_authenticated and profile_picture_url %}
 								<!-- Show profile picture in link when authenticated -->
 								<span class="d-lg-none">
 									<img src="{{ profile_picture_url }}" alt="profile pic" class="profile-image-toggler"/>
