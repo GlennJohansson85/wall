@@ -44,21 +44,18 @@
                             {% endfor %}
                         </ul>
 
-                        <!-- Form to add a comment using button or key "Enter"  -->
+                          <!-- Form to add a comment using button or key "Enter"  -->
                         <form method="post" action="{% url 'add_comment' item.post.id %}" id="comment-form-{{ item.post.id }}">
                             {% csrf_token %}
-
                             <div class="postwall-container">
-                                <textarea id="id_textarea" name="comment_text" rows="1" placeholder="Add Comment Here..."
-                                    onkeypress="handleKeyPress(event, {{ item.post.id }})"></textarea>
+                                <textarea id="id_textarea" name="comment_text" rows="1" placeholder="Add Comment Here..." onkeypress="handleKeyPress(event, {{ item.post.id }})"></textarea>
                                 <div class="postwall-button-container">
-                                    <!-- Submit button too add comment -->
+                                    <!-- Submit button to add comment -->
                                     <button type="submit" class="green-button" aria-label="Post comment">
                                         Post
                                     </button>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -69,8 +66,6 @@
         {% endif %}
     </div>
 {% endblock %}
-
 {% block extra_scripts %}
-<script src="{% static 'js/comment.js' %}" defer></script>
-<script src="{% static 'js/scroll_to_post.js' %}" defer></script>
+    <script src="{% static 'js/comment.js' %}" defer></script>
 {% endblock %}

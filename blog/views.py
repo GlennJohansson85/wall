@@ -127,16 +127,18 @@ def add_comment(request, post_id):
 
         if comment_text:
             Comment.objects.create(
-                post = post,
-                user = request.user,
-                text = comment_text
+                post=post,
+                user=request.user,
+                text=comment_text
             )
             messages.success(request, 'Comment added successfully!')
-            return redirect(f"{reverse('postwall')}?post_id={post.id}")
 
+            # Ensure a clean URL with a single `post_id` parameter
+            return redirect(f'{request.META["HTTP_REFERER"].split("?")[0]}?post_id={post_id}')
         else:
             messages.error(request, 'Comment cannot be empty.')
-    return redirect('postwall')
+
+    return redirect('postwall.html')
 
 
 @login_required
@@ -145,7 +147,7 @@ def delete_post_confirmation(request, post_id):
 
     if request.method == "POST":
         post.delete()
-        return redirect('postwall')
+        return redirect('postwall.html')
 
     context = {'post': post}
     return render(request, 'delete_post_confirmation.html', context)
