@@ -4,7 +4,7 @@
 ![image](https://github.com/user-attachments/assets/b564ec05-74e3-4e2f-bd17-a39f1b2476e2)
 
 ### About:
-Postwall is a platform where you can share your thoughts and daily experiences through blog posts and photos. Whether you're documenting your life, sharing creative projects, or simply reflecting on your day. Postwall provides a space for you to express yourself and connect with others.
+Wall is a platform where you can share your thoughts and daily experiences through blog posts and photos. Whether you're documenting your life, sharing creative projects, or simply reflecting on your day. Postwall provides a space for you to express yourself and connect with others.
 
 ### Project Goals:
 Create a blog platform using the tools and knowledge gained from Code Institute.
