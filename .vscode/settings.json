@@ -1,0 +1,24 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        ".mule": true
+    },
+    "editor.fontFamily": "Jetbrains Mono",
+    "editor.wordWrap": "on",
+    "application.experimental.rendererProfiling": true,
+    "mule.controlPlane": "EU Cloud",
+    "mule.telemetry.enabled": false,
+    "css.hover.documentation": false,
+    "json.schemas": [
+
+
+
+
+    ],
+    "workbench.settings.useSplitJSON": false,
+    "json.format.keepLines": false
+}

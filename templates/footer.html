@@ -1,6 +1,11 @@
 {% load static %}
 {% load tz %}
 
+{% block extra_css %}
+	<link href="{% static 'css/footer.css' %}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+
 {% block content %}
     <footer class="footer">
         <div class="footer-left">

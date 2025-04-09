@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # Debug settings
-DEBUG = False
+DEBUG = True
 
 # URLs and Hosts
 ROOT_URLCONF = 'wall.urls'
@@ -118,6 +118,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# Disable caching of static files in development (important for CSS changes)
+WHITENOISE_MAX_AGE = 0  # Set to 0 during development to avoid caching
 
 # Cloudinary will handle the media
 MEDIA_URL = '/media/'

@@ -1,0 +1,76 @@
+/* Footer.html */
+.footer {
+    font-family: 				"SweetLove-DOK99";
+    font-size:                  20px;
+    display: 					flex;
+    justify-content: 			space-between;
+    align-items: 				center;
+    padding:                    0 10px;
+	border-left: 				1px solid #000;
+	border-right: 				1px solid #000;
+    background-color: 			#000;
+    background-blend-mode: 		hard-light;
+	background-image: 			url("/static/img/brickwall.webp");
+	box-shadow:					inset 3vw 0px 1vw -1vw rgba(0, 0, 0, 0.11),
+    							inset -3vw 0px 1vw -1vw rgba(0, 0, 0, 0.11);
+}
+
+.footer-left {
+    display: 					block;
+    color:                      #000;
+}
+
+.footer-center {
+    display: 					flex;
+    justify-content: 			center;
+    gap: 						10px;
+}
+
+.footer-center a {
+    display: 					inline-block;
+    width: 						40px;
+    height: 					40px;
+    background-size: 			contain;
+    background-position: 		center;
+}
+
+.footer-right {
+    display: 					flex;
+    justify-content: 			flex-end;
+    gap: 						10px;
+}
+
+.footer-right a {
+    display: 					inline-block;
+    width: 						40px;
+    height: 					40px;
+    background-size: 			contain;
+    background-position: 		center;
+}
+
+.contact {
+    background-image: 			url("/static/icons/at.png");
+    width: 						40px;
+    height: 					40px;
+}
+
+.facebook {
+    background-image: 			url("/static/icons/fb.png");
+}
+
+.twitter {
+	background-image: 			url("/static/icons/twitter.png");
+}
+
+.linkedin {
+	background-image: 			url("/static/icons/linkedin.png");
+}
+
+.contact:hover,
+.facebook:hover,
+.twitter:hover,
+.linkedin:hover {
+    background-color: rgba(0, 0, 0, 0); /* Lägg till en transparent bakgrund */
+    border:2px solid #000;
+    border-radius: 50%;
+}

@@ -390,10 +390,9 @@ input:-webkit-autofill {
 }
 
 .postwall-comments-container {
-	margin-top: 1vh;
 	border-radius: 5px;
+	border: 2px outset #1b645e;
 	box-sizing: border-box;
-	background-color: #2f3d3ca9;
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 

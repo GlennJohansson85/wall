@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fileSizeDisplay.classList.remove('valid-size', 'invalid-size');
 
             // Check if size exceeds the limit (13 MB)
-            const maxSize = 13 * 1024 * 1024; // 13 MB
+            const maxSize = 10 * 1024 * 1024; // 10 MB
             if (fileSize > maxSize) {
                 fileSizeDisplay.classList.add('invalid-size'); // Apply red color if exceeds limit
                 return false; // Validation error, prevent further actions
