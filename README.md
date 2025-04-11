@@ -1,7 +1,8 @@
 # WALL
 *[Click here to see live project](https://postwall-500ee4318184.herokuapp.com/)*
 
-![image](https://github.com/user-attachments/assets/01a632e6-de12-45c1-bc7d-237afdcd441e)
+![image](https://github.com/user-attachments/assets/19fa8232-7aaf-4ac1-b325-f5c752f07771)
+
 
 
 ### About:
