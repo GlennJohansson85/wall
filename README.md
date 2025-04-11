@@ -4,6 +4,8 @@
 ![image](https://github.com/user-attachments/assets/ba8f9182-1c94-41ad-9691-8dbcebf62c61)
 
 
+Note: Projekt is being updated 
+
 
 ### About:
 Wall is a platform where you can share your thoughts and daily experiences through blog posts and photos. Whether you're documenting your life, sharing creative projects, or simply reflecting on your day. Postwall provides a space for you to express yourself and connect with others.
