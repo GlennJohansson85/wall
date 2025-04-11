@@ -2,6 +2,7 @@
 *[Click here to see live project](https://postwall-500ee4318184.herokuapp.com/)*
 
 ![image](https://github.com/user-attachments/assets/9378fc5f-646a-4f82-8f58-dfc1f0444fe6)
+![image](https://github.com/user-attachments/assets/01a632e6-de12-45c1-bc7d-237afdcd441e)
 
 
 ### About:
