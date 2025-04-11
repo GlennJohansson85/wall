@@ -1,7 +1,8 @@
 # WALL
 *[Click here to see live project](https://postwall-500ee4318184.herokuapp.com/)*
 
-![image](https://github.com/user-attachments/assets/b564ec05-74e3-4e2f-bd17-a39f1b2476e2)
+![image](https://github.com/user-attachments/assets/9378fc5f-646a-4f82-8f58-dfc1f0444fe6)
+
 
 ### About:
 Wall is a platform where you can share your thoughts and daily experiences through blog posts and photos. Whether you're documenting your life, sharing creative projects, or simply reflecting on your day. Postwall provides a space for you to express yourself and connect with others.
