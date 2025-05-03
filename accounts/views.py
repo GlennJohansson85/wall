@@ -15,7 +15,7 @@ from django.core.exceptions import ValidationError
 import requests
 
 from .forms import RegistrationForm, UserForm
-from .models import Profile
+from .models import Profile, FriendRequest
 
 
 def register(request):
@@ -194,19 +194,24 @@ def activate(request, uidb64, token):
 def dashboard(request):
     """
     Displays the user's dashboard page. The current authenticated user's profile
-    is passed to the template for rendering. If the user is not logged in, they
-    are redirected to the login page.
+    and their list of friends are passed to the template for rendering. If the user
+    is not logged in, they are redirected to the login page.
     """
 
     # Retrieve the current authenticated user's profile
     profile = request.user
+
+    # Retrieve the list of the user's friends (assuming 'friends' is a ManyToManyField)
+    friends = profile.friends.all()
+
     # Prepare the context to pass to the template
     context = {
         'profile': profile,
+        'friends': friends,
     }
-    # Render the dashboard template with the user's profile
-    return render(request, 'dashboard.html', context)
 
+    # Render the dashboard template with the user's profile and their friends list
+    return render(request, 'dashboard.html', context)
 
 @login_required
 def edit_profile(request):
@@ -464,3 +469,99 @@ def create_new_password(request, uidb64, token):
 
     # Render the create new password form with UID and token context passed
     return render(request, 'create_new_password.html', {'uidb64': uidb64, 'token': token})
+
+
+@login_required
+def profile_page(request, user_id):
+    """
+    Display another user's profile and show a 'Send Friend Request' button if appropriate.
+    """
+    user_profile = get_object_or_404(Profile, id=user_id)
+    current_user = request.user
+
+    # Check friendship status
+    is_friend = current_user.is_friend(user_profile)
+    already_requested = FriendRequest.objects.filter(from_user=current_user, to_user=user_profile).exists()
+
+    context = {
+        'user_profile': user_profile,
+        'is_friend': is_friend,
+        'already_requested': already_requested,
+    }
+    return render(request, 'profile_page.html', context)
+
+
+@login_required
+def friends(request):
+    """Display current user's friends and pending friend requests."""
+    user                = request.user
+    all_friends         = user.friends.all()
+    incoming_requests   = user.received_requests.all()
+    outgoing_requests   = user.sent_requests.all()
+
+    return render(request, 'friends.html', {
+        'friends': all_friends,
+        'incoming_requests': incoming_requests,
+        'outgoing_requests': outgoing_requests,
+    })
+
+
+@login_required
+def send_friend_request(request, user_id):
+    """Send a friend request to another user."""
+    to_user     = get_object_or_404(Profile, id=user_id)
+    from_user   = request.user
+
+    # Check if the user is not sending a request to themselves and hasn't already sent a request
+    if from_user != to_user and not FriendRequest.objects.filter(from_user=from_user, to_user=to_user).exists():
+        FriendRequest.objects.create(from_user=from_user, to_user=to_user)
+        messages.success(request, f'Friend request sent to {to_user.username}.')
+    else:
+        messages.warning(request, 'You have already sent a friend request or tried to add yourself.')
+
+    return redirect('profile_page', user_id=user_id)  # Redirect back to the profile page
+
+
+@login_required
+def accept_friend_request(request, request_id):
+    """Accept a received friend request."""
+    friend_request = get_object_or_404(FriendRequest, id=request_id)
+
+    if friend_request.to_user == request.user:
+        request.user.add_friend(friend_request.from_user)
+        friend_request.from_user.add_friend(request.user)
+        friend_request.delete()
+        messages.success(request, f'You are now friends with {friend_request.from_user.username}.')
+    else:
+        messages.error(request, 'You are not authorized to accept this request.')
+
+    return redirect('dashboard')
+
+
+@login_required
+def decline_friend_request(request, request_id):
+    """Decline a received friend request."""
+    friend_request = get_object_or_404(FriendRequest, id=request_id)
+
+    if friend_request.to_user == request.user:
+        friend_request.delete()
+        messages.success(request, 'Friend request declined.')
+    else:
+        messages.error(request, 'You are not authorized to decline this request.')
+
+    return redirect('dashboard')
+
+
+@login_required
+def remove_friend(request, user_id):
+    """Remove a friend."""
+    other_user = get_object_or_404(Profile, id=user_id)
+
+    if request.user.is_friend(other_user):
+        request.user.remove_friend(other_user)
+        other_user.remove_friend(request.user)
+        messages.success(request, f'You removed {other_user.username} as a friend.')
+    else:
+        messages.warning(request, 'You are not friends.')
+
+    return redirect('dashboard')

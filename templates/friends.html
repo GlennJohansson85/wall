@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Wall - Friends {% endblock %}
+
+{% block content %}
+    <div class="brickwall">
+        <div class="friends-container">
+            <div class="friends-page-header">FRIENDS</div>
+            <br>
+
+            <div class="friends-header">Your Friends:</div>
+            <ul class="friends-ul">
+                {% for friend in friends %}
+                    <li class="friends-li">
+                        <img src="{{ friend.profile_picture }}" alt="{{ friend.full_name }}" class="friends-thumb">{{ friend.full_name }} - 
+                        <a class="friends-remove" href="{% url 'remove_friend' friend.id %}">Remove</a>
+                    </li>
+                {% empty %}
+                    <li class="friends-li">None</li>
+                {% endfor %}
+            </ul>
+            <br>
+
+            <div class="friends-header">Incoming Friend Requests:</div>
+            <ul class="friends-ul">
+                {% for req in incoming_requests %}
+                    <li class="friends-li">
+                        {{ req.from_user.username }}
+                        <a href="{% url 'accept_friend_request' req.id %}">Accept</a> |
+                        <a href="{% url 'decline_friend_request' req.id %}">Decline</a>
+                    </li>
+                {% empty %}
+                    <li class="friends-li">None</li>
+                {% endfor %}
+            </ul>
+            <br>
+
+            <div class="friends-header">Sent Friend Requests:</div>
+            <ul class="friends-ul">
+                {% for req in outgoing_requests %}
+                    <li class="friends-li">{{ req.to_user.username }} (Pending)</li>
+                {% empty %}
+                    <li class="friends-li">None</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

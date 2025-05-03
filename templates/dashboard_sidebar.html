@@ -29,6 +29,14 @@
 				</a>
 			</li>
 
+			<!-- Friends -->
+			<li class="sidebar-li">
+				<a class="sidebar-item {% if request.resolver_match.url_name == 'friends' %} active {% endif %}"
+					id="item-friends" href="{% url 'friends' %}">
+					Friends
+				</a>
+			</li>
+
 			<br/>
 
 			<!-- Log out Button -->

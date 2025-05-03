@@ -18,10 +18,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = True
 
 # URLs and Hosts
-ROOT_URLCONF = 'wall.urls'
-WSGI_APPLICATION = 'wall.wsgi.application'
-CSRF_TRUSTED_ORIGINS = ['https://postwall-fde18acf5c20.herokuapp.com/']
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'postwall-fde18acf5c20.herokuapp.com']
+ROOT_URLCONF =          'wall.urls'
+WSGI_APPLICATION =      'wall.wsgi.application'
+CSRF_TRUSTED_ORIGINS =  ['https://postwall-fde18acf5c20.herokuapp.com/']
+ALLOWED_HOSTS =         ['localhost', '127.0.0.1', 'postwall-fde18acf5c20.herokuapp.com']
 
 
 
@@ -98,32 +98,32 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Initializing
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
+LANGUAGE_CODE =         'en-us'
+TIME_ZONE =             'UTC'
+USE_I18N =              True
+USE_L10N =              True
+USE_TZ =                True
 
 # Email Config.
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND =         'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS =         True
+EMAIL_PORT =            587
+EMAIL_HOST =            'smtp.gmail.com'
+EMAIL_HOST_USER =       os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD =   os.environ.get('EMAIL_HOST_PASSWORD')
 
 
 # Static files settings for local development
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL =            '/static/'
+STATICFILES_DIRS =      [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT =           os.path.join(BASE_DIR, 'staticfiles')
 
 # Disable caching of static files in development (important for CSS changes)
-WHITENOISE_MAX_AGE = 0  # Set to 0 during development to avoid caching
+WHITENOISE_MAX_AGE =    0  # Set to 0 during development to avoid caching
 
 # Cloudinary will handle the media
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR /'media'
+MEDIA_URL =             '/media/'
+MEDIA_ROOT =            BASE_DIR /'media'
 
 # Media files (Cloudinary)
 CLOUDINARY_STORAGE = {

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %} Wall - Post Detail {% endblock %}
+
 {% block content %}
     <div class="brickwall">
 
@@ -13,10 +15,9 @@
                     <img src="{{ post.img.url }}" class="img-fluid" alt="Post img"/>
                 </div>
             {% endif %}
-
-            <div class="post_detail-content">{{ post.content }}</div>
-            <div class="post_detail-meta">
-                (Posted by {{ post.user.username }} in {{ post.created_at }})
+            <div class="paper">
+                <div class="post_detail-content">{{ post.content }}</div>
+                <div class="post_detail-meta">(Posted by {{ post.user.username }} in {{ post.created_at }})</div>
             </div>
 
             <!-- Delete Post -->
@@ -63,7 +64,7 @@
                                 {% endif %}
                             </li>
                         {% empty %}
-                            <li class="post_detail-no-comments"> No comments yet!</li>
+                            <li class="post_detail-no-comments"> Be the first one to comment</li>
                         {% endfor %}
                     </ul>
                 </div>

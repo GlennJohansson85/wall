@@ -1,15 +1,21 @@
 from .models import Profile
 
-
 def profile_context(request):
     """
-    Adds the profile picture URL to the request context if the user is authenticated.
-    Returns None if the user has no profile picture or the profile doesn't exist.
+    Adds the profile picture URL and friends list to the context if the user is authenticated.
     """
     profile_picture_url = None
+    friends = []
+
     if request.user.is_authenticated:
         try:
             profile_picture_url = request.user.profile_picture.url if request.user.profile_picture else None
+            friends = request.user.friends.all()
         except Profile.DoesNotExist:
             pass
-    return {'profile_picture_url': profile_picture_url}
+
+    return {
+        'profile_picture_url': profile_picture_url,
+        'friends': friends
+    }
+

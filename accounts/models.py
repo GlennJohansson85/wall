@@ -21,6 +21,7 @@ class ProfileManager(BaseUserManager):
 
         # Normalize the email to ensure it is in a consistent format
         email = self.normalize_email(email)
+
         # Create a new user instance with the data below
         user = self.model(
             username = username,
@@ -31,8 +32,10 @@ class ProfileManager(BaseUserManager):
         )
         # Hash the user's password for security before saving
         user.set_password(password)
+        
         # Save the user instance to the database
         user.save(using=self._db)
+
         # Return the newly created user instance
         return user
 
@@ -65,21 +68,22 @@ class Profile(AbstractBaseUser):
     with specific fields and behavior for authentication.
     """
 
-    username = models.CharField(max_length=50, unique=True)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=100, unique=True)
-    profile_picture = CloudinaryField('image', blank=True, null=True)
-    date_joined = models.DateTimeField(auto_now_add=True)
-    last_login = models.DateTimeField(auto_now=True)
-    is_admin = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=True)
-    is_active = models.BooleanField(default=True)
-    is_inactive = models.BooleanField(default=True)
-    is_published = models.BooleanField(default=True)
+    username =          models.CharField(max_length=50, unique=True)
+    first_name =        models.CharField(max_length=50)
+    last_name =         models.CharField(max_length=50)
+    email =             models.EmailField(max_length=100, unique=True)
+    profile_picture =   CloudinaryField('image', blank=True, null=True)
+    date_joined =       models.DateTimeField(auto_now_add=True)
+    last_login =        models.DateTimeField(auto_now=True)
+    is_admin =          models.BooleanField(default=False)
+    is_staff =          models.BooleanField(default=True)
+    is_active =         models.BooleanField(default=True)
+    is_inactive =       models.BooleanField(default=True)
+    is_published =      models.BooleanField(default=True)
 
     # Specifies the field used for user login (email instead of username)
     USERNAME_FIELD = 'email'
+
     # Required fields when creating a user
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
@@ -91,6 +95,21 @@ class Profile(AbstractBaseUser):
         Returns the full name of the user by combining first and last names.
         """
         return f'{self.first_name} {self.last_name}'
+    
+    # Mutual friends (self-referencing many-to-many)
+    friends = models.ManyToManyField('self', symmetrical=True, blank=True)
+
+    def add_friend(self, profile):
+        """Add a friend (mutual)."""
+        self.friends.add(profile)
+
+    def remove_friend(self, profile):
+        """Remove a friend (mutual)."""
+        self.friends.remove(profile)
+
+    def is_friend(self, profile):
+        """Check if the profile is already a friend."""
+        return self.friends.filter(id=profile.id).exists()
 
     def __str__(self):
         """
@@ -110,3 +129,22 @@ class Profile(AbstractBaseUser):
         Returns True for all modules
         """
         return True
+
+
+class FriendRequest(models.Model):
+    """
+    Adding friends model
+    """
+    
+    # The user who sends the friend request
+    from_user = models.ForeignKey(Profile, related_name='sent_requests', on_delete=models.CASCADE)
+    
+    # The user who receives the friend request
+    to_user =   models.ForeignKey(Profile, related_name='received_requests', on_delete=models.CASCADE)
+    
+    # Timestamp when the friend request was created
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        # String representation to show who sent the request to whom
+        return f"{self.from_user.username} → {self.to_user.username}"

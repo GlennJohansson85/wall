@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Wall - Profile Page {% endblock %}
+
+{% block content %}
+    <div class="brickwall">
+        <div class="profile-container">
+            <div class="profile-page-header">Profile Page</div>
+                <div class="profile-divide row mx-auto">
+
+                    <!-- Left Column: User Info -->
+                    <div class="col-md-6">
+                        <div class="profile-header">Full Name:</div>
+                        <div class="profile-details">{{ user_profile.full_name }}</div>
+                        
+                        <div class="profile-header">User Name:</div>
+                        <div class="profile-details">{{ user_profile.username }}</div>
+                        
+                        <div class="profile-header">Email:</div> 
+                        <div class="profile-details">{{ user_profile.email }}</div>
+
+
+                        {% if request.user != user_profile %}
+                            {% if is_friend %}
+                                <a class="friends-icon" data-tooltip="You are friends!"></a>
+                            {% elif already_requested %}
+                                <p class="profile-info">Friend request already sent.</p>
+                            {% else %}
+                                <form method="post" action="{% url 'send_friend_request' user_profile.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Send Friend Request</button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+
+                <!-- Right Column: Profile Picture -->
+                <div class="col-md-6 d-flex justify-content-end align-items-start">
+                    {% if user_profile.profile_picture %}
+                        <img class="profile-page-img" src="{{ user_profile.profile_picture.url }}" alt="Profile picture">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

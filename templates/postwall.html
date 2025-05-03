@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %} Wall - Home {% endblock %}
+
 {% block content %}
     <div class="brickwall">
         {% if posts_with_comments %}
@@ -27,7 +29,11 @@
                         </div>
 
                         <!-- Meta & Content for specific Post -->
-                        <p class="postwall-meta">{{ item.post.user.username }} - {{ item.post.created_at }}</p>
+                        <p class="postwall-meta">
+                            <a class="user-link" href="{% url 'profile_page' item.post.user.id %}">
+                                {{ item.post.user.username }}
+                            </a> - {{ item.post.created_at }}
+                        </p>
                         <p class="postwall-content">{{ item.post.short_content }}</p>
                     </div>
 
@@ -37,8 +43,12 @@
                         <ul class="postwall-comments-ul">
                             <!-- Loop through comments if they exist -->
                             {% for comment in item.comments %}
-                                <li class="postwall-comments-li"><strong>{{ comment.user.username }}:</strong>
-                                    {{ comment.text }}
+                                <li class="postwall-comments-li">
+                                    <strong>
+                                        <a class="user-link" href="{% url 'profile_page' comment.user.id %}">
+                                            {{ comment.user.username }}
+                                        </a>:
+                                    </strong> {{ comment.text }}
                                 </li>
                             {% endfor %}
                         </ul>

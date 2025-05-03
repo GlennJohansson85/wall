@@ -12,7 +12,7 @@
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="navbar-brand {% if request.path == '/postwall/' %} active {% endif %}"
-						href="{% url 'postwall' %}">Post Wall</a>
+						href="{% url 'postwall' %}">Wall</a>
 				</li>
 			</ul>
 
@@ -52,10 +52,25 @@
 							href="#">Messages</a>
 					</li>
 
-					<!-- Friends Link - Not Operational -->
-					<li class="nav-item dropdown">
-						<a class="nav-link {% if request.resolver_match.url_name == '/friends/' %} active {% endif %}"
-							href="#">Friends</a>
+					<!-- Friends Dropdown -->
+					<li class="nav-item dropdown"
+						onmouseover="this.classList.add('show'); this.querySelector('.dropdown-menu').classList.add('show');"
+						onmouseout="this.classList.remove('show'); this.querySelector('.dropdown-menu').classList.remove('show');">
+						
+						<a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'friends' %} active {% endif %}"
+						href="{% url 'friends' %}" role="button" aria-expanded="false">
+							Friends
+						</a>
+
+						<div class="dropdown-menu">
+							{% if friends %}
+								{% for friend in friends %}
+									<a class="dropdown-item" href="{% url 'profile_page' friend.id %}">{{ friend.full_name }}</a>
+								{% endfor %}
+							{% else %}
+								<span class="dropdown-item text-muted">No friends yet</span>
+							{% endif %}
+						</div>
 					</li>
 
 					<!-- Dropdown Link (Profile Dashboard) -->

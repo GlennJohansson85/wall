@@ -112,21 +112,39 @@
 	height: 					auto;
 }
 
+.nav-item.dropdown {
+	position: relative;
+}
+
 .dropdown-menu {
 	font-family: 				"SF Cartoonist Hand SC Bold";
 	font-size:					18px;
 	line-height:				16px;
 	background-color: 			#3a3939;
 	background-clip: 			padding-box;
-    border:						2px solid #9b0067;
+	border:						2px solid #9b0067;
+	position: 					absolute;
+	top: 						100%;
+	left: 						0;
+	display: 					none;
+	z-index: 					1050;
+	min-width: 					160px;
+	transition: 				opacity 0.2s ease;
+}
+
+/* Show dropdown when hovering or class is applied */
+.nav-item.show .dropdown-menu,
+.nav-item.dropdown:hover .dropdown-menu,
+.nav-item.dropdown:focus-within .dropdown-menu {
+	display: block;
 }
 
 .dropdown-menu .dropdown-item {
-    color: 						#fff;
+	color: 						#fff;
 }
 
 .dropdown-menu .dropdown-item:hover {
-    color: 						#01f16d;
+	color: 						#01f16d;
 	background-color: 			transparent;
 }
 

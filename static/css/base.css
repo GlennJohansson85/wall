@@ -1,5 +1,5 @@
 
-/*																							 COCOGOOSE */
+/* 														COCOGOOSE */
 @font-face {
 	font-family: 				"Cocogoose-Narrow-Letterpress-trial";
 	src:						url("/static/fonts/Cocogoose-Narrow-Letterpress-trial.ttf") format("TrueType");
@@ -10,25 +10,25 @@
 	src: 						url("/static/fonts/Cocogoose-Condensed-Letterpress-trial.ttf")	format("TrueType");
 }
 
-/*																							 CRISPYCREAM3D */
+/* 														CRISPYCREAM3D */
 @font-face {
 	font-family: 				"CrispyCream3D-9YgR0";
 	src: 						url("/static/fonts/CrispyCream3D-9YgR0.otf") format("OpenType");
 }
 
-/*																							 SWEETLOVE */
+/* 														SWEETLOVE */
 @font-face {
 	font-family: 				"SweetLove-DOK99";
 	src: 						url("/static/fonts/SweetLove-DOK99.otf") format("OpenType");
 }
 
-/*																							 DIGITAL SEVEN */
+/* 														DIGITAL SEVEN */
 @font-face {
 	font-family: 				"digital-7";
 	src: 						url("/static/fonts/digital-7.ttf") format("TrueType");
 }
 
-/*																							 SINKIN SANS */
+/* 														SINKIN SANS */
 @font-face {
 	font-family: 				"SinkinSans-300Light";
 	src: 						url("/static/fonts/SinkinSans-300Light.otf") format("OpenType");
@@ -39,7 +39,7 @@
 	src: 						url("/static/fonts/SinkinSans-500Medium.otf") format("OpenType");
 }
 
-/*																							 SC CARTOONIST HAND */
+/* 														SC CARTOONIST HAND */
 @font-face {
 	font-family: 				"SF Cartoonist Hand";
 	src: 						url("/static/fonts/SF Cartoonist Hand.ttf") format("TrueType");
@@ -60,34 +60,34 @@
 	src: 						url("/static/fonts/SF Cartoonist Hand SC Bold Italic.ttf") format("TrueType");
 }
 
-/*																							 CARTOON CONDENSED */
+/* 														CARTOON CONDENSED */
 @font-face {
 	font-family: 				"Cartoon-Condensed";
 	src: 						url("/static/fonts/Cartoon-Condensed.ttf") format("TrueType");
 }
 
 
-
 /* Base Styles */
-body {
-	max-width: 					1200px;
-	width: 						100%;
-	margin: 					0 auto;
-	padding: 					0;
-	box-sizing: 				border-box;
+html {
+    background: 				url("/static/img/charcoal.gif") repeat; /* Background image only on html */
 }
 
-html {
-	height: 					100%;
-	background-color: #000;
-	background-size: 500px;
-	background-image: 				url("/static/img/concrete-wall-2.png");
+body {
+    max-width: 					1200px;
+    width: 						100%;
+    margin: 					0 auto;
+    padding: 					0;
+    box-sizing: 				border-box;
+    display: 					flex;
+    flex-direction: 			column;
+    min-height: 				100%;
 }
+
 
 /* Background Images */
 .brickwall {
 	max-width: 					100%;
-	min-height: 				100vh;
+	min-height: 				95vh;
 	box-sizing: 				border-box;
 	outline-width: 				5px;
 	position: 					relative;
@@ -103,9 +103,7 @@ html {
 .concrete {
 	max-width: 					800px;
 	width: 						100%;
-	margin: 					20px auto;
-	margin-bottom: 0;
-    padding-bottom: 0;
+	margin: 					0 auto;
 	box-sizing: 				border-box;
 	position: 					relative;
 	word-wrap: 					break-word;
@@ -116,6 +114,13 @@ html {
 	background-color: 			#000000ea;
 	background-size: 			400px;
 }
+
+/* Solution: Brickwall image fills the space between last post and footer so it looks the same as the rest of posts */
+.brickwall > .concrete {
+    margin: 					20px auto;
+}
+
+
 
 /* Color splashes (Backgrounds) */
 .stroke-1 {
@@ -283,7 +288,7 @@ input:-webkit-autofill {
 #id_current_password,
 #id_new_password,
 #id_confirm_password {
-	font-family:				"SF Cartoonist Hand";
+	font-family:				"SF Cartoonist Hand SC Bold";
 	font-size: 18px;
 	outline: 					none;
 	width: 						100%;
@@ -324,7 +329,7 @@ input:-webkit-autofill {
 
 }
 
-/* Postwall.html */
+/* 														POSTWALL.HTML */
 .polaroid {
 	max-width: 					100%;
 	box-sizing: 				border-box;
@@ -496,13 +501,22 @@ input:-webkit-autofill {
 	text-align: 				center;
 }
 
-/* Reset_Password.html */
+.user-link {
+	color: 						#a0176b;
+	text-decoration: 			none;
+}
+
+.user-link:hover {
+	color: 						#01f16d;
+}
+
+/* 														RESET_PASSWORD.HTML */
 .reset_password_guide {
 	font-family: 				"SinkinSans-300Light", "Sans-Serif";
 	color: 						#000;
 }
 
-/*																				LOGIN.HTML */
+/* 														LOGIN.HTML */
 .login-background {
 	max-width: 					800px;
 	width: 						100%;
@@ -562,7 +576,7 @@ input:-webkit-autofill {
 	color: 						#01f16d;
 }
 
-/* Post.html */
+/* 														POST.HTML */
 .post-header {
 	font-family: 				"Cocogoose-Condensed-letterpress-trial", "Sans-Serif";
 	text-align: 				center;
@@ -601,7 +615,7 @@ input:-webkit-autofill {
 
 
 
-/* Post_Detail.html */
+/* 														POST_DETAIL.HTML */
 .post_detail-container {
 	border-radius: 				5px;
 }
@@ -616,8 +630,8 @@ input:-webkit-autofill {
 }
 
 .post_detail-content {
-	font-family: 				"SinkinSans-300Light", "Sans-Serif";
-	margin-top: 				10px;
+	font-family: 				"SweetLove-DOK99";
+	font-size:					32px;
 	text-align: 				center;
 	white-space: 				normal;
 	word-wrap: 					break-word;
@@ -625,37 +639,52 @@ input:-webkit-autofill {
 }
 
 .post_detail-meta {
-	font-family: 				"SinkinSans-300Light", "Sans-Serif";
+	font-family: 				"SweetLove-DOK99";
+	font-size:					26px;
 	text-align: 				center;
 	color: 						#000;
 }
 
 .post_detail-comments-container {
-	border-color: 				#2f3d3ca9;
+	margin-top: 				1vh;
+	padding: 					5px;
+	border-radius: 				2px;
+	box-sizing: 				border-box;
+	border-radius: 				5px;
+	background-size: 			contain;
+	background-image: 			url("/static/img/abstract-433.png") no-repeat;
+	background-color: 			#0000000e;
 }
 
+    
+
 .post_detail-comments-header {
-	font-family: 				"SinkinSans-300Light", "Sans-Serif";
-	border-radius: 				5px 5px 0px 0px;
-	background-color: 			#2f3d3ca9;
+	font-family: 				"Cocogoose-Condensed-Letterpress-trial";
+	font-size: 					42px;
+	color:						#000000b9;
+    text-shadow: 				2px 1px 1px#d6d6d6;
 }
 
 .post_detail-comments {
 	list-style-type: 			none;
+
 }
 
 .post_detail-comments-ul {
-	font-family: 				"SinkinSans-300Light", "Sans-Serif";
+	font-family: 				"Cocogoose-Condensed-Letterpress-trial";
+	font-size: 					20px;
+	color:						#000000b9;
+    text-shadow: 				1px 1px 1px#d6d6d6;
 	margin: 					0px;
 	padding-left: 				0px;
 	border-radius: 				0px 0px 5px 5px;
-	border: 					6px solid #2f3d3ca9;
+	background-color:			transparent;
 }
 
 .post_detail-comments-li {
 	list-style: 				none;
-	background-color: 			#fffffffd;
-	border-top: 				6px solid #2f3d3ca9;
+	background-color: 			transparent;
+	border-bottom: 				3px inset #000000b9;
 }
 
 .post_detail-comments-li:first-child {
@@ -664,7 +693,7 @@ input:-webkit-autofill {
 
 .post_detail-no-comments {
 	padding-left: 				5px;
-	background-color: 			#FFF;
+	background-color: 			transparent;
 	list-style-type: 			none;
 }
 
@@ -745,7 +774,7 @@ input:-webkit-autofill {
 	}
 }
 
-/* Dashboard_Sidebar.html */
+/* 														DASHBOARD_SIDEBAR.HTML */
 .sidebar-ul {
 	font-family: 				"Cocogoose-Condensed-letterpress-trial";
 	padding: 					0px;
@@ -827,20 +856,165 @@ input:-webkit-autofill {
 }
 
 .dashboard-text {
-	font-family: 				"SinkinSans-500Medium", "Sans-Serif";
+	font-family: 				"SF Cartoonist Hand SC Bold";
+	font-size: 					22px;
 	text-align: 				center;
 }
 
-/* Edit_Profile.html */
+/* 														EDIT_PROFILE.HTML */
 .edit_profile-form {
 	margin: 					5px;
 	padding: 					10px;
 	border-radius: 				5px;
 	color: 						#ffde5c;
-	background-color: 			#00000086;
+	background-color: 			#424242;
 }
 
-/* Search_Results.html */
+/* 														PROFILE_PAGE.HTML */
+.profile-container {
+	max-width: 					600px;
+	margin: 					60px auto;
+	padding: 					20px;
+	border-radius: 				5px;
+	border: 					2px inset #000;
+	color:						#ffde5c;
+	background-size:			cover;
+	background-repeat: 			no-repeat;
+	background-position: 		top;
+	background-color: 			#000;
+	background-image:			url("/static/img/abstract-366.png");
+}
+
+.profile-page-header {
+	font-family: 				"Cocogoose-Narrow-Letterpress-trial";
+	text-shadow: 				2px 1px 1px #000;
+	font-size: 					42px;
+	text-align: 				center;
+}
+
+/* LEFT COLUMN: User Info */
+.profile-header {
+	font-family: 				"Cocogoose-Narrow-Letterpress-trial";
+	font-size: 					24px;
+	margin-top: 				10px;
+}
+
+.profile-details {
+	font-family: 				"digital-7";
+	font-size: 					24px;
+	color: 						#01f16d;
+	border-bottom: 2px dashed #818181;
+}
+
+.profile-info {
+	font-family: 				"digital-7";
+	font-size: 					16px;
+	color: 						#fff;
+}
+
+/* This icon will appear at your friends profile page */
+.friends-icon {
+	margin-top: 				15px;
+    width: 						30px;
+    height: 					30px;
+	display: 					inline-block;
+	position: 					relative;
+    background-size: 			contain;
+	background-image: 			url("/static/icons/friend-check.png");
+}
+
+/* Hovering = "You are friends!" */
+.friends-icon::after {
+    content: 					attr(data-tooltip);
+    position: 					absolute;
+    left: 						270%; /* Text appear on the righ side of the icon */
+	margin-left: 				10px;
+    padding: 					5px 10px;
+    border-radius: 				4px;
+    white-space: 				nowrap;
+	font-family: 				"SF Cartoonist Hand SC Bold";
+    font-size: 					16px;
+    opacity: 					0;
+    pointer-events: 			none;
+    z-index: 					1000;
+	color: 						#ffde5c;
+    background-color: 			transparent;
+	transform: 					translateX(-50%);
+	transition: 				opacity 0.3s ease;
+}
+
+.friends-icon:hover::after {
+    opacity: 1;
+}
+
+/* RIGHT COLUMN: Users Profile Image */
+.profile-page-img {
+	max-width: 					250px;
+	height: 					auto;
+}
+
+/* 														FRIENDS.HTML */
+.friends-container {
+	max-width: 					600px;
+	margin: 					60px auto;
+	padding: 					20px;
+	border-radius: 				5px;
+	border: 					2px inset #000;
+	color:						#ffde5c;
+	background-image:			url("/static/img/friends-background.png");
+	background-size:			cover;
+	background-position: 		center;
+
+}
+
+.friends-page-header {
+	font-family: 				"Cocogoose-Narrow-Letterpress-trial";
+	text-shadow: 				2px 1px 1px #000;
+	font-size: 					42px;
+}
+
+.friends-header {
+	font-family: 				"Cocogoose-Narrow-Letterpress-trial";
+	font-size: 					24px;
+}
+
+.friends-ul {
+	margin: 					5px 0;
+	padding: 					0 20px;
+	list-style-type: 			none;
+}
+
+.friends-li {
+	font-family: 				"digital-7";
+	font-size:					20px;
+	display: 					flex;
+	align-items: 				flex-end; 	/* Align at bottom */
+	padding: 					0;
+	gap: 						5px; 		/* Space = img - text */
+	border-bottom: 				2px dashed #818181;
+	color: 						#01f16d;
+	
+}
+
+.friends-thumb {
+    width: 						40px;
+    height: 					auto;
+    object-fit: 				cover;
+    margin-right: 				10px;
+    vertical-align: 			middle;
+}
+
+.friends-remove {
+	text-decoration: 			none;
+	color: 						#d80491;
+}
+
+.friends-remove:hover {
+	color: 						#ff0000;
+	border-bottom: 				2px dashed #ff0000;
+}
+
+/* 														SEARCH_RESULTS.HTML */
 .search_results-container-all {
 	margin: 					40px auto;
 	padding: 					10px;
@@ -899,7 +1073,7 @@ input:-webkit-autofill {
 
 
 
-/* Alerts.html */
+/* 														ALERTS.HTML */
 .alert-c {
 	font-family: 				"SinkinSans-500Medium", "Sans-Serif";
 	font-size: 					14px;
@@ -926,7 +1100,7 @@ input:-webkit-autofill {
 }
 
 
-/* Small Screens */
+/* 														SMAL SCREENS */
 @media (max-width: 768px) {
 	.brickwall {
 		padding: 				50px 20px;
@@ -969,14 +1143,6 @@ input:-webkit-autofill {
 		padding: 				10px 40px 20px 40px;
 	}
 
-	/*.form-label {
-		font-size: 				12px;
-	}
-
-	.smal-text {
-		font-size: 				12px;
-	}*/
-
 	.post_detail-container {
 		margin-top: 			20px;
 	}
@@ -989,28 +1155,8 @@ input:-webkit-autofill {
 		text-align: 			center;
 	}
 
-	.post_detail-content {
-		font-family: 			"SinkinSans-300Light", "Sans-Serif";
-		font-size: 				16px;
-	}
-
-	.post_detail-meta {
-		font-size: 				14px;
-		margin-top: 			5px;
-	}
-
 	.post_detail-comments-container {
 		margin-top: 			20px;
-	}
-
-	.post_detail-comments-header {
-		font-size: 				18px;
-		padding: 				5px 0 0 5px;
-	}
-
-	.post_detail-comments-li {
-		padding-left: 			5px;
-		font-size: 				14px;
 	}
 
 	.post_detail-delete-post-container {
@@ -1040,17 +1186,12 @@ input:-webkit-autofill {
 
 	.dashboard-text {
 		margin: 				10px 0 10px 0;
-		font-size: 				20px;
 	}
 
 	.form-title {
 		font-size: 				24px;
 	}
 
-	/*.account-container {
-		margin-top: 			30px;
-		font-size: 				12px;
-	}*/
 
 	.button-1 {
 		font-size: 				16px;
@@ -1065,7 +1206,7 @@ input:-webkit-autofill {
 	}
 }
 
-/* Medium Screens */
+/* 														MEDIUM SCREENS */
 @media (min-width: 769px) and (max-width: 1200px) {
 	.brickwall {
 		padding: 				60px 30px;
@@ -1108,14 +1249,6 @@ input:-webkit-autofill {
 		padding: 				0 80px 20px 80px;
 	}
 
-	/*.form-label {
-		font-size: 				14px;
-	}
-
-	.smal-text {
-		font-size: 				14px;
-	}*/
-
 	.post_detail-title {
 		font-size: 				40px;
 	}
@@ -1124,28 +1257,8 @@ input:-webkit-autofill {
 		text-align: 			center;
 	}
 
-	.post_detail-content {
-		font-family: 			"SinkinSans-300Light", "Sans-Serif";
-		font-size: 				20px;
-	}
-
-	.post_detail-meta {
-		margin-top: 			5px;
-		font-size: 				14px;
-	}
-
 	.post_detail-comments-container {
 		margin: 				20px 40px;
-	}
-
-	.post_detail-comments-header {
-		padding: 				5px 0 0 5px;
-		font-size: 				20px;
-	}
-
-	.post_detail-comments-li {
-		padding-left: 			5px;
-		font-size: 				16px;
 	}
 
 	.post_detail-delete-post-container {
@@ -1175,7 +1288,6 @@ input:-webkit-autofill {
 
 	.dashboard-text {
 		margin: 				10px 0 10px 0;
-		font-size: 				20px;
 	}
 
 	.sidebar-logout-button-container {
@@ -1185,11 +1297,6 @@ input:-webkit-autofill {
 	.form-title {
 		font-size: 				30px;
 	}
-
-	/*.account-container {
-		margin-top: 			35px;
-		font-size: 				14px;
-	}*/
 
 	.button-1 {
 		font-size: 				20px;
@@ -1204,7 +1311,7 @@ input:-webkit-autofill {
 	}
 }
 
-/* Large Screens */
+/* 														LARGE SCREENS */
 @media (min-width: 1201px) {
 	.brickwall {
 		padding-top: 			70px;
@@ -1247,14 +1354,6 @@ input:-webkit-autofill {
 		padding: 				0 100px 20px 100px;
 	}
 
-	/*.form-label {
-		font-size: 				14px;
-	}
-
-	.smal-text {
-		font-size: 				14px;
-	}*/
-
 	.post_detail-container {
 		margin: 				35px;
 	}
@@ -1267,28 +1366,8 @@ input:-webkit-autofill {
 		text-align: 			center;
 	}
 
-	.post_detail-content {
-		font-family: 			"SinkinSans-300Light";
-		font-size: 				24px;
-	}
-
-	.post_detail-meta {
-		margin-top: 			5px;
-		font-size: 				16px;
-	}
-
 	.post_detail-comments-container {
 		margin: 				20px 60px 0 60px;
-	}
-
-	.post_detail-comments-header {
-		padding: 				5px 0 0 5px;
-		font-size: 				24px;
-	}
-
-	.post_detail-comments-li {
-		padding-left: 			5px;
-		font-size: 				16px;
 	}
 
 	.post_detail-delete-post-container {
@@ -1319,17 +1398,11 @@ input:-webkit-autofill {
 
 	.dashboard-text {
 		margin: 				10px 0 10px;
-		font-size: 				16px;
 	}
 
 	.form-title {
 		font-size: 				36px;
 	}
-
-	/*.account-container {
-		margin-top: 			30px;
-		font-size: 				14px;
-	}*/
 
 	.button-1 {
 		font-size: 				20px;
