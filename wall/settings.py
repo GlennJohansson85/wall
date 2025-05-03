@@ -18,12 +18,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = False
 
 # URLs and Hosts
-ROOT_URLCONF =          'wall.urls'
-WSGI_APPLICATION =      'wall.wsgi.application'
-CSRF_TRUSTED_ORIGINS =  ['https://postwall-fde18acf5c20.herokuapp.com/']
-ALLOWED_HOSTS =         ['localhost', '127.0.0.1', 'postwall-fde18acf5c20.herokuapp.com']
-
-
+ROOT_URLCONF = 'wall.urls'
+WSGI_APPLICATION = 'wall.wsgi.application'
+CSRF_TRUSTED_ORIGINS = ['https://wall-2bb3003277ac.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'wall-2bb3003277ac.herokuapp.com']
 
 # Installed apps
 INSTALLED_APPS = [
