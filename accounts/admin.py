@@ -24,8 +24,8 @@ class ProfileAdmin(UserAdmin):
     )
 
     list_display_links = ('thumbnail', 'email',)
-    readonly_fields = ('last_login', 'date_joined',)
-    ordering = ('-date_joined',)
+    readonly_fields    = ('last_login', 'date_joined',)
+    ordering           = ('-date_joined',)
 
 
     fieldsets = (

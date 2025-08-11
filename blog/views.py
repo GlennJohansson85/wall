@@ -14,7 +14,7 @@ from accounts.models import Profile
 
 def postwall(request):
     posts_with_comments = []
-    posts = Post.objects.filter(is_published=True).order_by('-created_at')
+    posts               = Post.objects.filter(is_published=True).order_by('-created_at')
 
     for post in posts:
         comments = post.comments.all()
@@ -22,7 +22,7 @@ def postwall(request):
 
     context = {
         'posts_with_comments': posts_with_comments,
-        'user': request.user,
+        'user'               : request.user,
     }
     return render(request, "postwall.html", context)
 
@@ -34,7 +34,7 @@ def post(request):
         form = PostForm(request.POST, request.FILES)
 
         if form.is_valid():
-            post = form.save(commit=False)
+            post      = form.save(commit=False)
             post.user = request.user
 
             # If there is an image uploaded
@@ -94,7 +94,7 @@ def post(request):
 
 
 def post_detail(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+    post     = get_object_or_404(Post, id=post_id)
     comments = post.comments.all()
 
     if request.method == 'POST':
@@ -109,10 +109,10 @@ def post_detail(request, post_id):
         comment_form = CommentForm()
 
     context = {
-        'post': post,
-        'comments': comments,
+        'post'        : post,
+        'comments'    : comments,
         'comment_form': comment_form,
-        'user': request.user,
+        'user'        : request.user,
     }
 
     return render(request, 'post_detail.html', context)
@@ -127,9 +127,9 @@ def add_comment(request, post_id):
 
         if comment_text:
             Comment.objects.create(
-                post=post,
-                user=request.user,
-                text=comment_text
+                post = post,
+                user = request.user,
+                text = comment_text
             )
             messages.success(request, 'Comment added successfully!')
 
@@ -181,7 +181,7 @@ def delete_comment(request, comment_id):
 
 def search(request):
     keyword = request.GET.get('keyword', '')
-    posts = []
+    posts   = []
 
     if keyword:
         posts = Post.objects.filter(title__icontains=keyword)
@@ -189,10 +189,10 @@ def search(request):
 
 
 def search_suggestions(request):
-    keyword = request.GET.get('keyword', '')
+    keyword     = request.GET.get('keyword', '')
     suggestions = []
 
     if keyword:
-        posts = Post.objects.filter(title__icontains=keyword)[:10]
+        posts       = Post.objects.filter(title__icontains=keyword)[:10]
         suggestions = [{'id': post.id, 'title': post.title} for post in posts]
     return JsonResponse({'suggestions': suggestions})

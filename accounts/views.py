@@ -24,8 +24,6 @@ def register(request):
     creates a new user, and sends an account activation email. On successful registration,
     redirects the user to the login page.
     """
-
-    # If request method is POST
     if request.method == 'POST':
         # Instantiate the RegistrationForm with the submitted data
         form = RegistrationForm(request.POST)
@@ -33,19 +31,19 @@ def register(request):
         # If form data is valid
         if form.is_valid():
             # Extract cleaned data from the form
-            email       = form.cleaned_data['email']
-            username    = email.split("@")[0] # Use the part before '@' in the email as the username
-            password    = form.cleaned_data['password']
-            first_name  = form.cleaned_data['first_name']
-            last_name   = form.cleaned_data['last_name']
+            email      = form.cleaned_data['email']
+            username   = email.split("@")[0] # Use the part before '@' in the email as the username
+            password   = form.cleaned_data['password']
+            first_name = form.cleaned_data['first_name']
+            last_name  = form.cleaned_data['last_name']
 
             # Create user by data input
             user = Profile.objects.create_user(
-                email       = email,
-                username    = username,
-                password    = password,
-                first_name  = first_name,
-                last_name   = last_name,
+                email      = email,
+                username   = username,
+                password   = password,
+                first_name = first_name,
+                last_name  = last_name,
             )
             # Save the user instance to the database
             user.save()
@@ -56,18 +54,13 @@ def register(request):
 
             # Render the activation email template with context
             message = render_to_string('verification_email.html', {
-                'user': user,
-                # Domain for the activation link
+                'user'  : user,
                 'domain': current_site,
-                # Encode user ID
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                # Generate activation token
-                'token': default_token_generator.make_token(user),
+                'uid'   : urlsafe_base64_encode(force_bytes(user.pk)),
+                'token' : default_token_generator.make_token(user),
             })
             # Set the recipient email
-            to_email = email
-
-            # Create EmailMessage instance to send the activation email
+            to_email   = email
             send_email = EmailMessage(
                 mail_subject,
                 message,
@@ -76,14 +69,12 @@ def register(request):
                 # Recipient's email
                 to=[to_email]
             )
-
             # Specify the content type as HTML
             send_email.content_subtype = "html"
             # Send the email
             send_email.send()
             # Display a success message to the user
             messages.success(request, 'Activation link sent to your email')
-
             # Redirect the user to the login page after successful registration
             return redirect('/accounts/login/')
 
@@ -97,7 +88,6 @@ def register(request):
         # Pass the form to the template
         'form': form,
     }
-
     # Render the registration template with the context
     return render(request, 'register.html', context)
 
@@ -108,8 +98,6 @@ def login(request):
     If the credentials are valid, logs the user in and redirects to the postwall page.
     If invalid, an error message is shown and the user is redirected to the login page.
     """
-
-    # If the request method is POST (i.e., the form has been submitted)
     if request.method == "POST":
         # Retrieve the email from the POST request data
         email = request.POST['email']
@@ -144,8 +132,6 @@ def logout(request):
     Logs the user out if they are authenticated and redirects them to the login page.
     A success message is displayed after logout.
     """
-
-    # Log the user out of the session
     auth.logout(request)
     # Display a success message for logout
     messages.success(request, 'Loggout Successful!')
@@ -160,11 +146,9 @@ def activate(request, uidb64, token):
     account is activated and they are redirected to the login page. If invalid, an
     error message is shown and the user is redirected to the registration page.
     """
-
     try:
         # Decode the user ID from the base64 format
-        uid = urlsafe_base64_decode(uidb64).decode()
-        # Retrieve the user associated with the decoded user ID
+        uid  = urlsafe_base64_decode(uidb64).decode()
         user = Profile._default_manager.get(pk=uid)
 
     # If there's an error, set user to None
@@ -197,14 +181,8 @@ def dashboard(request):
     and their list of friends are passed to the template for rendering. If the user
     is not logged in, they are redirected to the login page.
     """
-
-    # Retrieve the current authenticated user's profile
     profile = request.user
-
-    # Retrieve the list of the user's friends (assuming 'friends' is a ManyToManyField)
     friends = profile.friends.all()
-
-    # Prepare the context to pass to the template
     context = {
         'profile': profile,
         'friends': friends,
@@ -245,7 +223,7 @@ def edit_profile(request):
 
                 try:
                     # Upload to Cloudinary (or other cloud storage)
-                    upload_result = upload(profile_picture)
+                    upload_result        = upload(profile_picture)
                     user.profile_picture = upload_result['secure_url']
                 except Exception as e:
                     messages.error(request, f"An error occurred during image upload: {str(e)}")
@@ -286,10 +264,10 @@ def change_password(request):
     # If the request method is POST (i.e., the form has been submitted)
     if request.method == 'POST':
         # Retrieve the data submitted by the user associated with the current session
-        current_password        = request.POST['current_password']
-        new_password            = request.POST['new_password']
-        confirm_new_password    = request.POST['confirm_new_password']
-        user                    = Profile.objects.get(username__exact=request.user.username)
+        current_password     = request.POST['current_password']
+        new_password         = request.POST['new_password']
+        confirm_new_password = request.POST['confirm_new_password']
+        user                 = Profile.objects.get(username__exact=request.user.username)
 
         # If the new password match the confirmation password
         if new_password == confirm_new_password:
@@ -331,7 +309,6 @@ def reset_password(request, uidb64, token):
       invalid, it redirects to the request
     password reset page.
     """
-
     try:
         # Decode the user ID from the base64 format
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -383,8 +360,6 @@ def request_password_reset(request):
     with the reset link is sent. Success and error messages are displayed
     based on the outcome.
     """
-
-    # If the request method is POST (i.e., the form has been submitted)
     if request.method == 'POST':
         # Retrieve the email from the POST request data
         email = request.POST['email']
@@ -392,23 +367,18 @@ def request_password_reset(request):
         # Try to find a user with the provided email
         try:
             # Using the user's email to find the user
-            user = Profile.objects.get(email=email)
-            # Get the current site domain for the email
+            user         = Profile.objects.get(email=email)
             current_site = get_current_site(request)
-            # Subject of the email
             mail_subject = 'Reset your password'
-            # Render the email template with user details, domain, uid, and token
-            message = render_to_string('request_password_reset.html', {
-                'user': user,
+            message      = render_to_string('request_password_reset.html', {
+                'user'  : user,
                 'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user),
+                'uid'   : urlsafe_base64_encode(force_bytes(user.pk)),
+                'token' : default_token_generator.make_token(user),
             })
 
              # Prepare the recipient email address
-            to_email = email
-
-            # Create and send the email
+            to_email      = email
             email_message = EmailMessage(
                 mail_subject,
                 message,
@@ -441,21 +411,16 @@ def create_new_password(request, uidb64, token):
     and redirects them to the login page. Displays an error message for invalid
     reset links or mismatched passwords.
     """
-
-    # If the request is a POST (i.e., form submission)
     if request.method == 'POST':
         # Retrieve new password and confirmation from the form
-        new_password = request.POST.get('new_password')
+        new_password         = request.POST.get('new_password')
         confirm_new_password = request.POST.get('confirm_new_password')
 
         # If the new passwords match
         if new_password == confirm_new_password:
             try:
-                # Decode the user's unique ID from the URL-safe base64 string
-                uid = force_bytes(urlsafe_base64_decode(uidb64))
-                # Fetch the user (Profile model used instead of Django's default User model)
+                uid  = force_bytes(urlsafe_base64_decode(uidb64))
                 user = Profile.objects.get(pk=uid)
-                # Set the new password and save the user
                 user.set_password(new_password)
                 user.save()
                 # Display a success message
@@ -480,12 +445,12 @@ def profile_page(request, user_id):
     current_user = request.user
 
     # Check friendship status
-    is_friend = current_user.is_friend(user_profile)
+    is_friend         = current_user.is_friend(user_profile)
     already_requested = FriendRequest.objects.filter(from_user=current_user, to_user=user_profile).exists()
 
     context = {
-        'user_profile': user_profile,
-        'is_friend': is_friend,
+        'user_profile'     : user_profile,
+        'is_friend'        : is_friend,
         'already_requested': already_requested,
     }
     return render(request, 'profile_page.html', context)
@@ -494,13 +459,13 @@ def profile_page(request, user_id):
 @login_required
 def friends(request):
     """Display current user's friends and pending friend requests."""
-    user                = request.user
-    all_friends         = user.friends.all()
-    incoming_requests   = user.received_requests.all()
-    outgoing_requests   = user.sent_requests.all()
+    user              = request.user
+    all_friends       = user.friends.all()
+    incoming_requests = user.received_requests.all()
+    outgoing_requests = user.sent_requests.all()
 
     return render(request, 'friends.html', {
-        'friends': all_friends,
+        'friends'          : all_friends,
         'incoming_requests': incoming_requests,
         'outgoing_requests': outgoing_requests,
     })
@@ -509,8 +474,8 @@ def friends(request):
 @login_required
 def send_friend_request(request, user_id):
     """Send a friend request to another user."""
-    to_user     = get_object_or_404(Profile, id=user_id)
-    from_user   = request.user
+    to_user   = get_object_or_404(Profile, id=user_id)
+    from_user = request.user
 
     # Check if the user is not sending a request to themselves and hasn't already sent a request
     if from_user != to_user and not FriendRequest.objects.filter(from_user=from_user, to_user=to_user).exists():

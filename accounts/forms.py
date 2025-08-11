@@ -12,7 +12,7 @@ class RegistrationForm(forms.ModelForm):
     # Define the password field with a password input widget
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Choose a strong password',
-        'class': 'form-control',
+        'class'      : 'form-control',
     }))
 
     # Define the confirm password field with a password input widget
@@ -31,12 +31,8 @@ class RegistrationForm(forms.ModelForm):
         Custom validation method to ensure the password and confirm password fields match.
         Raises a ValidationError if they do not.
         """
-
-        # Call the parent clean method
-        cleaned_data = super(RegistrationForm, self).clean()
-        # Get the password value
-        password = cleaned_data.get('password')
-        # Get the confirm password value
+        cleaned_data     = super(RegistrationForm, self).clean()
+        password         = cleaned_data.get('password')
         confirm_password = cleaned_data.get('confirm_password')
 
         # If passwords match - confirm
@@ -54,15 +50,13 @@ class RegistrationForm(forms.ModelForm):
         This method is called when an instance of RegistrationForm is created.
         It allows us to set initial attributes such as placeholder text and CSS classes for each field.
         """
-
-        # Call the parent class's __init__ method to ensure that the form is properly initialized
         super(RegistrationForm, self).__init__(*args, **kwargs)
 
         # Set placeholder text for the fields to guide the user
-        self.fields['username'].widget.attrs['placeholder'] = 'Hoffmeister'
+        self.fields['username'].widget.attrs['placeholder']   = 'Hoffmeister'
         self.fields['first_name'].widget.attrs['placeholder'] = 'David'
-        self.fields['last_name'].widget.attrs['placeholder'] = 'Hasselhoff'
-        self.fields['email'].widget.attrs['placeholder'] = 'David.Hasselhoff@hotmail.com'
+        self.fields['last_name'].widget.attrs['placeholder']  = 'Hasselhoff'
+        self.fields['email'].widget.attrs['placeholder']      = 'David.Hasselhoff@hotmail.com'
 
         # Loop through all fields in the form to add a CSS class for styling
         for field in self.fields:
@@ -74,9 +68,6 @@ class UserForm(forms.ModelForm):
     """
     For updating user profile information incl. first name, last name, email, username and profile picture.
     """
-
     class Meta:
-        # Specify the model that the form is associated with
-        model = Profile
-        # Define the fields that will be included in the form
+        model  = Profile
         fields = ['first_name', 'last_name', 'email', 'username', 'profile_picture']
