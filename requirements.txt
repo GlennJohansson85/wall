@@ -10,7 +10,7 @@ charset-normalizer==3.4.1
 cloudinary==1.43.0
 cryptography==44.0.2
 dj-database-url==2.3.0
-Django==5.1.7
+Django==5.1.14
 django-cloudinary-storage==0.3.0
 django-storages==1.14.5
 dnspython==2.7.0
