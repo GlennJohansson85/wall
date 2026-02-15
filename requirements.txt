@@ -14,7 +14,7 @@ Django==5.1.7
 django-cloudinary-storage==0.3.0
 django-storages==1.14.5
 dnspython==2.7.0
-eventlet==0.39.1
+eventlet==0.40.3
 falcon==4.0.2
 greenlet==3.1.1
 gunicorn==23.0.0
